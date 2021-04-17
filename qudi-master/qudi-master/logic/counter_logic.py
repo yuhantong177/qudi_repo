@@ -58,18 +58,18 @@ class CounterLogic(GenericLogic):
     _modclass = 'CounterLogic'
     _modtype = 'logic'
 
-    ## declare connectors
+    ## declare connectors (slow counter hardware corresponding to the counter_logic)
     counter1 = Connector(interface='SlowCounterInterface')
     savelogic = Connector(interface='SaveLogic')
 
-    # status vars
+    # status vars of the counter
     _count_length = StatusVar('count_length', 300)
     _smooth_window_length = StatusVar('smooth_window_length', 10)
     _counting_samples = StatusVar('counting_samples', 1)
     _count_frequency = StatusVar('count_frequency', 50)
     _saving = StatusVar('saving', False)
 
-
+    # instantiation for counter_logic
     def __init__(self, config, **kwargs):
         """ Create CounterLogic object with connectors.
 
@@ -78,7 +78,7 @@ class CounterLogic(GenericLogic):
         """
         super().__init__(config=config, **kwargs)
 
-        #locking for thread safety
+        # locking for thread safety
         self.threadlock = Mutex()
 
         self.log.debug('The following configuration was found.')
@@ -126,7 +126,7 @@ class CounterLogic(GenericLogic):
 
         self._saving_start_time = time.time()
 
-        # connect signals
+        # connect signals to the counter
         self.sigCountDataNext.connect(self.count_loop_body, QtCore.Qt.QueuedConnection)
         return
 
@@ -140,12 +140,13 @@ class CounterLogic(GenericLogic):
         if self.module_state() == 'locked':
             self._stopCount_wait()
 
+        # disconnect the signal from counter
         self.sigCountDataNext.disconnect()
         return
 
     def get_hardware_constraints(self):
         """
-        Retrieve the hardware constrains from the counter device.
+        Retrieve the hardware constraints from the counter device.
 
         @return SlowCounterConstraints: object with constraints for the counter
         """
@@ -161,6 +162,8 @@ class CounterLogic(GenericLogic):
         @return int: oversampling in units of bins.
         """
         # Determine if the counter has to be restarted after setting the parameter
+        # param restart: whether the counter restart or not
+        # a locked state means the counter is running
         if self.module_state() == 'locked':
             restart = True
         else:
@@ -219,6 +222,7 @@ class CounterLogic(GenericLogic):
             restart = False
 
         if constraints.min_count_frequency <= frequency <= constraints.max_count_frequency:
+            # stop the counter and set to this frequency in range
             self._stopCount_wait()
             self._count_frequency = frequency
             # if the counter was running, restart it
@@ -236,7 +240,7 @@ class CounterLogic(GenericLogic):
         """
         return self._count_length
 
-    #FIXME: get from hardware
+    # FIXME: get the frequency from the slow counter hardware
     def get_count_frequency(self):
         """ Returns the currently set frequency of counting (resolution).
 
@@ -278,6 +282,7 @@ class CounterLogic(GenericLogic):
         self.sigSavingStatusChanged.emit(self._saving)
         return self._saving
 
+    # save data to file
     def save_data(self, to_file=True, postfix='', save_figure=True):
         """ Save the counter trace data and writes it to a file.
 
@@ -654,6 +659,7 @@ class CounterLogic(GenericLogic):
         start_time = time.time()
         while self.module_state() == 'locked':
             time.sleep(0.1)
+            # if the counter is still running after the timeout duration then error returns
             if time.time() - start_time >= timeout:
                 self.log.error('Stopping the counter timed out after {0}s'.format(timeout))
                 return -1
