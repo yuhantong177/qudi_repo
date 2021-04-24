@@ -50,13 +50,15 @@ class ConfocalHistoryEntry(QtCore.QObject):
         """ Make a confocal data setting with default values. """
         super().__init__()
 
+        # the depth scan is in xz direction
         self.depth_scan_dir_is_xz = True
         self.depth_img_is_xz = True
 
+        # the y line position default is 0
         self.xy_line_pos = 0
         self.depth_line_pos = 0
 
-        # Reads in the maximal scanning range. The unit of that scan range is meters!
+        # Reads in the maximal scanning range (from the scanning hardware). The unit of that scan range is meters!
         self.x_range = confocal._scanning_device.get_position_range()[0]
         self.y_range = confocal._scanning_device.get_position_range()[1]
         self.z_range = confocal._scanning_device.get_position_range()[2]
@@ -87,7 +89,7 @@ class ConfocalHistoryEntry(QtCore.QObject):
 
         # tilt correction stuff:
         self.tilt_correction = False
-        # rotation point for tilt correction
+        # rotation point for tilt correction (rotate by the center of the range)
         self.tilt_reference_x = 0.5 * (self.x_range[0] + self.x_range[1])
         self.tilt_reference_y = 0.5 * (self.y_range[0] + self.y_range[1])
         # sample slope
@@ -132,13 +134,19 @@ class ConfocalHistoryEntry(QtCore.QObject):
 
         confocal.initialize_image()
         try:
+            # if the image is in same shape for confocal initialized image and the first initialized image,
+            # then copy the first initialized image to the confocal image initialization
+            # (error checking code)
             if confocal.xy_image.shape == self.xy_image.shape:
                 confocal.xy_image = np.copy(self.xy_image)
         except AttributeError:
+            # if error occurs, copy the confocal image to the first initialized image
             self.xy_image = np.copy(confocal.xy_image)
 
         confocal._zscan = True
         confocal.initialize_image()
+
+        # error checking
         try:
             if confocal.depth_image.shape == self.depth_image.shape:
                 confocal.depth_image = np.copy(self.depth_image)
@@ -148,6 +156,7 @@ class ConfocalHistoryEntry(QtCore.QObject):
 
     def snapshot(self, confocal):
         """ Extract all necessary data from a confocal logic and keep it for later use """
+        # transfer data from confocal module to the ConfocalHistoryEntry class
         self.current_x = confocal._current_x
         self.current_y = confocal._current_y
         self.current_z = confocal._current_z
@@ -175,6 +184,9 @@ class ConfocalHistoryEntry(QtCore.QObject):
         self.xy_image = np.copy(confocal.xy_image)
         self.depth_image = np.copy(confocal.depth_image)
 
+    # serializing data to convert object into linear byte stream, which is good for transferring data
+    # or sending data over network
+    # deserializing data is converting the linear byte stream back to original data type
     def serialize(self):
         """ Give out a dictionary that can be saved via the usual means """
         serialized = dict()
@@ -284,6 +296,7 @@ class ConfocalLogic(GenericLogic):
 
     signal_history_event = QtCore.Signal()
 
+    # declaring and initializing variables
     def __init__(self, config, **kwargs):
         super().__init__(config=config, **kwargs)
 
@@ -304,12 +317,12 @@ class ConfocalLogic(GenericLogic):
         self._scanning_device = self.confocalscanner1()
         self._save_logic = self.savelogic()
 
-        # Reads in the maximal scanning range. The unit of that scan range is micrometer!
+        # Reads in the maximal scanning range (from the scanning device). The unit of that scan range is micrometer!
         self.x_range = self._scanning_device.get_position_range()[0]
         self.y_range = self._scanning_device.get_position_range()[1]
         self.z_range = self._scanning_device.get_position_range()[2]
 
-        # restore here ...
+        # restore here ... (restoring history and error checking)
         self.history = []
         for i in reversed(range(1, self.max_history_length)):
             try:
@@ -325,6 +338,8 @@ class ConfocalLogic(GenericLogic):
             except:
                 self.log.warning(
                         'Restoring history {0} failed.'.format(i))
+
+        # add a new state and append to history
         try:
             new_state = ConfocalHistoryEntry(self)
             new_state.deserialize(self._statusVariables['history_0'])
@@ -378,7 +393,8 @@ class ConfocalLogic(GenericLogic):
         @return int: error code (0:OK, -1:error)
         """
         self._clock_frequency = int(clock_frequency)
-        #checks if scanner is still running
+        # checks if scanner is still running
+        # cannot set clock frequency when running
         if self.module_state() == 'locked':
             return -1
         else:
@@ -396,6 +412,7 @@ class ConfocalLogic(GenericLogic):
 #            time.sleep(0.01)
         self._scan_counter = 0
         self._zscan = zscan
+        # select either depth (z) scan or xy scan by changing zscan boolean variable
         if self._zscan:
             self._zscan_continuable = True
         else:
@@ -410,6 +427,7 @@ class ConfocalLogic(GenericLogic):
         @return int: error code (0:OK, -1:error)
         """
         self._zscan = zscan
+        # value of scan counter set to scan line position
         if zscan:
             self._scan_counter = self._depth_line_pos
         else:
@@ -440,13 +458,14 @@ class ConfocalLogic(GenericLogic):
         # z1: x-start-value, z2: x-end-value
         z1, z2 = self.image_z_range[0], self.image_z_range[1]
 
-        # Checks if the x-start and x-end value are ok
+        # Checks if the x-start and x-end value are ok (x1 cannot be smaller than x2)
         if x2 < x1:
             self.log.error(
                 'x1 must be smaller than x2, but they are '
                 '({0:.3f},{1:.3f}).'.format(x1, x2))
             return -1
 
+        # xz or yz scan (depth scan)
         if self._zscan:
             if self.depth_img_is_xz:
                 # creates an array of evenly spaced numbers over the interval
@@ -473,6 +492,7 @@ class ConfocalLogic(GenericLogic):
                 return -1
 
             # prevents distorion of the image
+            # decrease the corresponding space between numbers by the proportion of x and y range
             if (x2 - x1) >= (y2 - y1):
                 self._X = np.linspace(x1, x2, max(self.xy_resolution, 2))
                 self._Y = np.linspace(y1, y2, max(int(self.xy_resolution*(y2-y1)/(x2-x1)), 2))
@@ -604,6 +624,7 @@ class ConfocalLogic(GenericLogic):
         clock_status = self._scanning_device.set_up_scanner_clock(
             clock_frequency=self._clock_frequency)
 
+        # if clock status param has error, stop the scanning and returns error
         if clock_status < 0:
             self._scanning_device.module_state.unlock()
             self.module_state.unlock()
@@ -612,6 +633,7 @@ class ConfocalLogic(GenericLogic):
 
         scanner_status = self._scanning_device.set_up_scanner()
 
+        # if something wrong with scanner status, stop the clock and stop scanning
         if scanner_status < 0:
             self._scanning_device.close_scanner_clock()
             self._scanning_device.module_state.unlock()
@@ -654,7 +676,7 @@ class ConfocalLogic(GenericLogic):
 
         @return int: error code (0:OK, -1:error)
         """
-        # Changes the respective value
+        # Changes the respective value (of the defined positions)
         if x is not None:
             self._current_x = x
         if y is not None:
@@ -664,7 +686,7 @@ class ConfocalLogic(GenericLogic):
         if a is not None:
             self._current_a = a
 
-        # Checks if the scanner is still running
+        # Checks if the scanner or the confocal logic module is still running, returns error if running
         if self.module_state() == 'locked' or self._scanning_device.module_state() == 'locked':
             return -1
         else:
@@ -880,7 +902,7 @@ class ConfocalLogic(GenericLogic):
         parameters['Clock frequency of scanner (Hz)'] = self._clock_frequency
         parameters['Return Slowness (Steps during retrace line)'] = self.return_slowness
 
-        # Prepare a figure to be saved
+        # Prepare a figure to be saved (initialize an empty figure)
         figure_data = self.xy_image[:, :, 3]
         image_extent = [self.image_x_range[0],
                         self.image_x_range[1],
