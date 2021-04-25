@@ -48,7 +48,7 @@ class ODMRLogic(GenericLogic):
     savelogic = Connector(interface='SaveLogic')
     taskrunner = Connector(interface='TaskRunner')
 
-    # config option
+    # config option (configuration default values in the window)
     mw_scanmode = ConfigOption(
                     'scanmode',
                     'SWEEP',
@@ -83,6 +83,7 @@ class ODMRLogic(GenericLogic):
         super().__init__(config=config, **kwargs)
         self.threadlock = Mutex()
 
+    # when module odmr is opened, these parameters are set to the corresponding values
     def on_activate(self):
         """
         Initialisation performed during activation of the module.
@@ -139,6 +140,7 @@ class ODMRLogic(GenericLogic):
         self.sigNextLine.connect(self._scan_odmr_line, QtCore.Qt.QueuedConnection)
         return
 
+    # when closing the module odmr
     def on_deactivate(self):
         """ Deinitialisation performed during deactivation of the module.
         """
@@ -147,6 +149,7 @@ class ODMRLogic(GenericLogic):
             self.stop_odmr_scan()
         timeout = 30.0
         start_time = time.time()
+        # checks the timeout value left every 0.5 seconds. If the timeout is not positive, output error message
         while self.module_state() == 'locked':
             time.sleep(0.5)
             timeout -= (time.time() - start_time)
@@ -159,6 +162,8 @@ class ODMRLogic(GenericLogic):
         # Disconnect signals
         self.sigNextLine.disconnect()
 
+    # a lorentzian fit is primarily for one single mode system
+    # whereas a gaussian fit is for a distribution of modes
     @fc.constructor
     def sv_set_fits(self, val):
         # Setup fit container
@@ -214,6 +219,9 @@ class ODMRLogic(GenericLogic):
         self.sigOdmrFitUpdated.emit(self.odmr_fit_x, self.odmr_fit_y, {}, current_fit)
         return
 
+    # list modes are for a list of discrete frequency values. this is to test if a device is responding well to specific
+    # frequency values. sweep mode on the other hand is good for testing a range of frequency.
+    # sweep mode is done using a function generator with sine, square, pulse, ramp, triangle or arbitrary waveforms.
     def set_trigger(self, trigger_pol, frequency):
         """
         Set trigger polarity of external microwave trigger (for list and sweep mode).
@@ -223,6 +231,7 @@ class ODMRLogic(GenericLogic):
 
         @return object: actually set trigger polarity returned from hardware
         """
+        # actual frequency in data
         if self._lock_in_active:
             frequency = frequency / self._oversampling
 
@@ -270,7 +279,7 @@ class ODMRLogic(GenericLogic):
 
         @return int: actually set clock frequency
         """
-        # checks if scanner is still running
+        # checks if scanner is still running and the data type of clock_frequency variable
         if self.module_state() != 'locked' and isinstance(clock_frequency, (int, float)):
             self.clock_frequency = int(clock_frequency)
         else:
@@ -318,7 +327,7 @@ class ODMRLogic(GenericLogic):
 
         @param bool active: specify if signal should be detected with lock in
         """
-        # checks if scanner is still running
+        # checks if scanner is still running and data type "active" is boolean
         if self.module_state() != 'locked' and isinstance(active, bool):
             self._lock_in_active = active
             self._odmr_counter.lock_in_active = self._lock_in_active
@@ -401,6 +410,7 @@ class ODMRLogic(GenericLogic):
                                             current freq_step, current power
         """
         limits = self.get_hw_constraints()
+        # checks if it's running
         if self.module_state() != 'locked':
             if isinstance(start, (int, float)):
                 self.mw_start = limits.frequency_in_range(start)
@@ -408,6 +418,7 @@ class ODMRLogic(GenericLogic):
                 if stop <= start:
                     stop = start + step
                 self.mw_stop = limits.frequency_in_range(stop)
+                # if mw mode is list mode, get the list from the parameters
                 if self.mw_scanmode == MicrowaveMode.LIST:
                     self.mw_step = limits.list_step_in_range(step)
                 elif self.mw_scanmode == MicrowaveMode.SWEEP:
@@ -415,6 +426,7 @@ class ODMRLogic(GenericLogic):
             if isinstance(power, (int, float)):
                 self.sweep_mw_power = limits.power_in_range(power)
         else:
+            # cannot set frequency when the odmr has started running
             self.log.warning('set_sweep_parameters failed. Logic is locked.')
 
         param_dict = {'mw_start': self.mw_start, 'mw_stop': self.mw_stop, 'mw_step': self.mw_step,
@@ -424,7 +436,7 @@ class ODMRLogic(GenericLogic):
 
     def mw_cw_on(self):
         """
-        Switching on the mw source in cw mode.
+        Switching on the mw source in cw (continuous wave) mode.
 
         @return str, bool: active mode ['cw', 'list', 'sweep'], is_running
         """
@@ -582,6 +594,8 @@ class ODMRLogic(GenericLogic):
 
             self.set_trigger(self.mw_trigger_pol, self.clock_frequency)
 
+            # lock the module after it starts running
+            # initialize variables
             self.module_state.lock()
             self._clearOdmrData = False
             self.stopRequested = False
@@ -599,6 +613,7 @@ class ODMRLogic(GenericLogic):
                 self.module_state.unlock()
                 return -1
 
+            # checks the status, whether it's running or not
             mode, is_running = self.mw_sweep_on()
             if not is_running:
                 self._stop_odmr_counter()
@@ -606,7 +621,7 @@ class ODMRLogic(GenericLogic):
                 return -1
 
             self._initialize_odmr_plots()
-            # initialize raw_data array
+            # initialize raw_data array with zeroes
             estimated_number_of_lines = self.run_time * self.clock_frequency / self.odmr_plot_x.size
             estimated_number_of_lines = int(1.5 * estimated_number_of_lines)  # Safety
             if estimated_number_of_lines < self.number_of_lines:
@@ -695,6 +710,7 @@ class ODMRLogic(GenericLogic):
                 return
 
             # if during the scan a clearing of the ODMR data is needed:
+            # clear the previous sweeps and change start time to the time now
             if self._clearOdmrData:
                 self.elapsed_sweeps = 0
                 self._startTime = time.time()
