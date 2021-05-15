@@ -41,6 +41,10 @@ class CounterLogic(GenericLogic):
 
     @return error: 0 is OK, -1 is error
     """
+    # Signals and slots are used for communication between objects. A signal is emitted when a particular event occurs.
+    # A slot is a function that is called in response to a particular signal.
+    # The documentation of the Qt's signals and slots can be found on this link:
+    # https://doc.qt.io/qt-5/signalsandslots.html
     sigCounterUpdated = QtCore.Signal()
 
     sigCountDataNext = QtCore.Signal()
@@ -63,10 +67,10 @@ class CounterLogic(GenericLogic):
     savelogic = Connector(interface='SaveLogic')
 
     # status vars of the counter
-    _count_length = StatusVar('count_length', 300)
-    _smooth_window_length = StatusVar('smooth_window_length', 10)
-    _counting_samples = StatusVar('counting_samples', 1)
-    _count_frequency = StatusVar('count_frequency', 50)
+    _count_length = StatusVar('count_length', 300) # counter's shown length is 300 measurements
+    _smooth_window_length = StatusVar('smooth_window_length', 10) # 10 data points on moving average for smoothing data
+    _counting_samples = StatusVar('counting_samples', 1) # oversampling parameter (measurements per data point)
+    _count_frequency = StatusVar('count_frequency', 50) # number of measurements per second
     _saving = StatusVar('saving', False)
 
     # instantiation for counter_logic
@@ -79,6 +83,17 @@ class CounterLogic(GenericLogic):
         super().__init__(config=config, **kwargs)
 
         # locking for thread safety
+        # Mutex is a mutual exclusion object that synchronizes access to a resource.
+        # Mutex is a locking mechanism that makes sure only one thread can acquire the Mutex at a time and enter the
+        # critical section. This thread only releases the Mutex when it exits the critical section.
+        """
+        example of using Mutex():
+        wait(mutex);
+        ...
+        (critical section)
+        ...
+        signal(mutex);
+        """
         self.threadlock = Mutex()
 
         self.log.debug('The following configuration was found.')
@@ -87,14 +102,15 @@ class CounterLogic(GenericLogic):
         for key in config.keys():
             self.log.debug('{0}: {1}'.format(key, config[key]))
 
-        # in bins
+        # in bins (vars explained in comments from line 70)
         self._count_length = 300
         self._smooth_window_length = 10
-        self._counting_samples = 1      # oversampling
+        self._counting_samples = 1
         # in hertz
         self._count_frequency = 50
 
         # self._binned_counting = True  # UNUSED?
+        # This is the default counting mode - continuous
         self._counting_mode = CountingMode['CONTINUOUS']
 
         self._saving = False
@@ -104,6 +120,7 @@ class CounterLogic(GenericLogic):
         """ Initialisation performed during activation of the module.
         """
         # Connect to hardware and save logic
+        # (explained in SlowCounterInterface and SaveLogic)
         self._counting_device = self.counter1()
         self._save_logic = self.savelogic()
 
@@ -124,6 +141,7 @@ class CounterLogic(GenericLogic):
         # Flag to stop the loop
         self.stopRequested = False
 
+        # time: Return the current time in seconds since the Epoch.
         self._saving_start_time = time.time()
 
         # connect signals to the counter
@@ -137,8 +155,9 @@ class CounterLogic(GenericLogic):
         self._statusVariables['counting_mode'] = self._counting_mode.name
 
         # Stop measurement
+        # lock is used as a synchronization tool, preventing threads outputting at the same time
         if self.module_state() == 'locked':
-            self._stopCount_wait()
+            self._stopCount_wait() # function defined in the bottom of this file
 
         # disconnect the signal from counter
         self.sigCountDataNext.disconnect()
@@ -150,9 +169,10 @@ class CounterLogic(GenericLogic):
 
         @return SlowCounterConstraints: object with constraints for the counter
         """
+        # the get_constraints() function is defined in hardware/national_instruments_x_series.py
         return self._counting_device.get_constraints()
 
-    def set_counting_samples(self, samples=1):
+    def set_counting_samples(self, samples=1): # function of setting the oversampling number
         """
         Sets the length of the counted bins.
         The counter is stopped first and restarted afterwards.
@@ -174,7 +194,7 @@ class CounterLogic(GenericLogic):
             self._counting_samples = int(samples)
             # if the counter was running, restart it
             if restart:
-                self.startCount()
+                self.startCount() # startCount() redirects to counting mode's start function
         else:
             self.log.warning('counting_samples has to be larger than 0! Command ignored!')
         self.sigCountingSamplesChanged.emit(self._counting_samples)
@@ -195,8 +215,8 @@ class CounterLogic(GenericLogic):
             restart = False
 
         if length > 0:
-            self._stopCount_wait()
-            self._count_length = int(length)
+            self._stopCount_wait() # explained in the bottom of the file
+            self._count_length = int(length) # explained in line 70
             # if the counter was running, restart it
             if restart:
                 self.startCount()
@@ -279,6 +299,7 @@ class CounterLogic(GenericLogic):
         if self.module_state() != 'locked':
             self.startCount()
 
+        # the "emit()" sends signal to the slot function, executing the slot codes
         self.sigSavingStatusChanged.emit(self._saving)
         return self._saving
 
@@ -412,14 +433,14 @@ class CounterLogic(GenericLogic):
                 self.log.warning('Counter already running. Method call ignored.')
                 return 0
 
-            # Set up clock
+            # Set up clock (the function set_up_clock() is defined in hardware/national_instruments_x_series.py)
             clock_status = self._counting_device.set_up_clock(clock_frequency=self._count_frequency)
             if clock_status < 0:
                 self.module_state.unlock()
                 self.sigCountStatusChanged.emit(False)
                 return -1
 
-            # Set up counter
+            # Set up counter (the function set_up_counter() is defined in hardware/national_instruments_x_series.py)
             if self._counting_mode == CountingMode['FINITE_GATED']:
                 counter_status = self._counting_device.set_up_counter(counter_buffer=self._count_length)
             # elif self._counting_mode == CountingMode['GATED']:
@@ -476,6 +497,7 @@ class CounterLogic(GenericLogic):
                     return
 
                 # read the current counter value
+                # the function get_counter() defined in hardware/national_instruments_x_series.py
                 self.rawdata = self._counting_device.get_counter(samples=self._counting_samples)
                 if self.rawdata[0, 0] < 0:
                     self.log.error('The counting went wrong, killing the counter.')
@@ -554,6 +576,7 @@ class CounterLogic(GenericLogic):
 
             @return list(str): return list of active counter channel names
         """
+        # (function get_counter_channels() defined in hardware/national_instruments_x_series.py)
         return self._counting_device.get_counter_channels()
 
     def _process_data_continous(self):
