@@ -54,11 +54,14 @@ class ConfocalHistoryEntry(QtCore.QObject):
         self.depth_scan_dir_is_xz = True
         self.depth_img_is_xz = True
 
-        # the y line position default is 0
+        # initialization of xy and xz line positions
         self.xy_line_pos = 0
         self.depth_line_pos = 0
 
         # Reads in the maximal scanning range (from the scanning hardware). The unit of that scan range is meters!
+        # get_position_range() "@return float [4][2]: array of 4 ranges with an array containing lower
+        #                               and upper limit. "
+        # for example, x_range[0] and x_range[1] are respectively lower and upper limits of x range
         self.x_range = confocal._scanning_device.get_position_range()[0]
         self.y_range = confocal._scanning_device.get_position_range()[1]
         self.z_range = confocal._scanning_device.get_position_range()[2]
@@ -92,10 +95,10 @@ class ConfocalHistoryEntry(QtCore.QObject):
         # rotation point for tilt correction (rotate by the center of the range)
         self.tilt_reference_x = 0.5 * (self.x_range[0] + self.x_range[1])
         self.tilt_reference_y = 0.5 * (self.y_range[0] + self.y_range[1])
-        # sample slope
+        # sample slope (initialization)
         self.tilt_slope_x = 0
         self.tilt_slope_y = 0
-        # tilt correction points
+        # tilt correction points (initialization)
         self.point1 = np.array((0, 0, 0))
         self.point2 = np.array((0, 0, 0))
         self.point3 = np.array((0, 0, 0))
@@ -107,6 +110,7 @@ class ConfocalHistoryEntry(QtCore.QObject):
 
     def restore(self, confocal):
         """ Write data back into confocal logic and pull all the necessary strings """
+        # the variables and functions are defined above
         confocal._current_x = self.current_x
         confocal._current_y = self.current_y
         confocal._current_z = self.current_z
@@ -132,11 +136,13 @@ class ConfocalHistoryEntry(QtCore.QObject):
         confocal._scanning_device.tilt_reference_y = self.tilt_reference_y
         confocal._scanning_device.tiltcorrection = self.tilt_correction
 
+        # for xy scan
         confocal.initialize_image()
         try:
             # if the image is in same shape for confocal initialized image and the first initialized image,
             # then copy the first initialized image to the confocal image initialization
             # (error checking code)
+            # the shape property is about the multidimensional arrays
             if confocal.xy_image.shape == self.xy_image.shape:
                 confocal.xy_image = np.copy(self.xy_image)
         except AttributeError:
@@ -144,8 +150,9 @@ class ConfocalHistoryEntry(QtCore.QObject):
             self.xy_image = np.copy(confocal.xy_image)
 
         confocal._zscan = True
-        confocal.initialize_image()
 
+        # for xz scan
+        confocal.initialize_image()
         # error checking
         try:
             if confocal.depth_image.shape == self.depth_image.shape:
@@ -276,7 +283,7 @@ class ConfocalLogic(GenericLogic):
     return_slowness = StatusVar(default=50)
     max_history_length = StatusVar(default=10)
 
-    # signals
+    # signals (explained in counter_logic)
     signal_start_scanning = QtCore.Signal(str)
     signal_continue_scanning = QtCore.Signal(str)
     signal_stop_scanning = QtCore.Signal()
@@ -300,7 +307,8 @@ class ConfocalLogic(GenericLogic):
     def __init__(self, config, **kwargs):
         super().__init__(config=config, **kwargs)
 
-        #locking for thread safety
+        # locking for thread safety
+        # mutex explained in counter_logic
         self.threadlock = Mutex()
 
         # counter for scan_image
@@ -380,6 +388,7 @@ class ConfocalLogic(GenericLogic):
 
         @return int: error code (0:OK, -1:error)
         """
+        # following functions defined in hardware/national_instruments_x_series.py
         if to_on:
             return self._scanning_device.activation()
         else:
@@ -427,7 +436,7 @@ class ConfocalLogic(GenericLogic):
         @return int: error code (0:OK, -1:error)
         """
         self._zscan = zscan
-        # value of scan counter set to scan line position
+        # value of scan counter set to scan depth/xy line position according to whether it's z scan or xy scan
         if zscan:
             self._scan_counter = self._depth_line_pos
         else:
@@ -441,6 +450,7 @@ class ConfocalLogic(GenericLogic):
         @return int: error code (0:OK, -1:error)
         """
         with self.threadlock:
+            # if the scan is running, then stop request is valid
             if self.module_state() == 'locked':
                 self.stopRequested = True
         self.signal_stop_scanning.emit()
@@ -458,7 +468,7 @@ class ConfocalLogic(GenericLogic):
         # z1: x-start-value, z2: x-end-value
         z1, z2 = self.image_z_range[0], self.image_z_range[1]
 
-        # Checks if the x-start and x-end value are ok (x1 cannot be smaller than x2)
+        # Checks if the x-start and x-end value are ok (x1 cannot be larger than x2)
         if x2 < x1:
             self.log.error(
                 'x1 must be smaller than x2, but they are '
@@ -474,7 +484,7 @@ class ConfocalLogic(GenericLogic):
             else:
                 self._Y = np.linspace(y1, y2, self.xy_resolution)
 
-            # Checks if the z-start and z-end value are ok
+            # Checks if the z-start and z-end value are ok (z1 cannot be larger than z2)
             if z2 < z1:
                 self.log.error(
                     'z1 must be smaller than z2, but they are '
@@ -484,14 +494,14 @@ class ConfocalLogic(GenericLogic):
             # z1, z2 and the spacing is equal to z_resolution
             self._Z = np.linspace(z1, z2, max(self.z_resolution, 2))
         else:
-            # Checks if the y-start and y-end value are ok
+            # Checks if the y-start and y-end value are ok (y1 cannot be larger than y2)
             if y2 < y1:
                 self.log.error(
                     'y1 must be smaller than y2, but they are '
                     '({0:.3f},{1:.3f}).'.format(y1, y2))
                 return -1
 
-            # prevents distorion of the image
+            # prevents distortion of the image
             # decrease the corresponding space between numbers by the proportion of x and y range
             if (x2 - x1) >= (y2 - y1):
                 self._X = np.linspace(x1, x2, max(self.xy_resolution, 2))
@@ -592,24 +602,29 @@ class ConfocalLogic(GenericLogic):
             self.module_state.unlock()
             return -1
 
+        # set_up_scanner_clock: Configures the hardware clock of the NiDAQ card to give the timing.
         clock_status = self._scanning_device.set_up_scanner_clock(
             clock_frequency=self._clock_frequency)
 
         if clock_status < 0:
+            # stop running module and scanning device and reset position
             self._scanning_device.module_state.unlock()
             self.module_state.unlock()
             self.set_position('scanner')
             return -1
 
+        # set_up_scanner: Configures the actual scanner with a given clock.
         scanner_status = self._scanning_device.set_up_scanner()
 
         if scanner_status < 0:
+            # stop running and close clock and reset position
             self._scanning_device.close_scanner_clock()
             self._scanning_device.module_state.unlock()
             self.module_state.unlock()
             self.set_position('scanner')
             return -1
 
+        # the "emit()" sends signal to the slot function, executing the slot codes
         self.signal_scan_lines_next.emit()
         return 0
 
@@ -768,6 +783,7 @@ class ConfocalLogic(GenericLogic):
                 lsy = np.linspace(self._current_y, image[self._scan_counter, 0, 1], rs)
                 lsz = np.linspace(self._current_z, image[self._scan_counter, 0, 2], rs)
                 if n_ch <= 3:
+                    # stack arrays row-wise (vertical stack)
                     start_line = np.vstack([lsx, lsy, lsz][0:n_ch])
                 else:
                     start_line = np.vstack(
@@ -969,8 +985,10 @@ class ConfocalLogic(GenericLogic):
 
         The second file saves the full raw data with x, y, z, and counts at every pixel.
         """
+        # get_path_for_module: Method that creates a path for 'module_name' where data are stored.
+        # defined in file logic/save_logic.py
         filepath = self._save_logic.get_path_for_module('Confocal')
-        timestamp = datetime.datetime.now()
+        timestamp = datetime.datetime.now() # get the current date and time
         # Prepare the metadata parameters (common to both saved files):
         parameters = OrderedDict()
 
