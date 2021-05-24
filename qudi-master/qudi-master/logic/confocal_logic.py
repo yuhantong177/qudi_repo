@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-This module operates a confocal microsope.
+This module operates a confocal microscope.
 
 Qudi is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -110,7 +110,7 @@ class ConfocalHistoryEntry(QtCore.QObject):
 
     def restore(self, confocal):
         """ Write data back into confocal logic and pull all the necessary strings """
-        # the variables and functions are defined above
+        # variables and functions are defined above
         confocal._current_x = self.current_x
         confocal._current_y = self.current_y
         confocal._current_z = self.current_z
@@ -283,7 +283,10 @@ class ConfocalLogic(GenericLogic):
     return_slowness = StatusVar(default=50)
     max_history_length = StatusVar(default=10)
 
-    # signals (explained in counter_logic)
+    # Signals and slots are used for communication between objects. A signal is emitted when a particular event occurs.
+    # A slot is a function that is called in response to a particular signal.
+    # The documentation of the Qt's signals and slots can be found on this link:
+    # https://doc.qt.io/qt-5/signalsandslots.html
     signal_start_scanning = QtCore.Signal(str)
     signal_continue_scanning = QtCore.Signal(str)
     signal_stop_scanning = QtCore.Signal()
@@ -308,7 +311,9 @@ class ConfocalLogic(GenericLogic):
         super().__init__(config=config, **kwargs)
 
         # locking for thread safety
-        # mutex explained in counter_logic
+        # Mutex is a mutual exclusion object that synchronizes access to a resource.
+        # Mutex is a locking mechanism that makes sure only one thread can acquire the Mutex at a time and enter the
+        # critical section. This thread only releases the Mutex when it exits the critical section.
         self.threadlock = Mutex()
 
         # counter for scan_image
@@ -358,6 +363,7 @@ class ConfocalLogic(GenericLogic):
         finally:
             self.history.append(new_state)
 
+        # index starts from 0
         self.history_index = len(self.history) - 1
 
         # Sets connections between signals and functions
@@ -376,6 +382,7 @@ class ConfocalLogic(GenericLogic):
         closing_state.snapshot(self)
         self.history.append(closing_state)
         histindex = 0
+        # serialize each state into strings of state history in a reversed order (so the newest is displayed first)
         for state in reversed(self.history):
             self._statusVariables['history_{0}'.format(histindex)] = state.serialize()
             histindex += 1
@@ -427,6 +434,7 @@ class ConfocalLogic(GenericLogic):
         else:
             self._xyscan_continuable = True
 
+        # the "emit()" sends signal to the slot function, executing the slot codes
         self.signal_start_scanning.emit(tag)
         return 0
 
@@ -457,7 +465,7 @@ class ConfocalLogic(GenericLogic):
         return 0
 
     def initialize_image(self):
-        """Initalization of the image.
+        """Initialization of the image.
 
         @return int: error code (0:OK, -1:error)
         """
@@ -524,14 +532,19 @@ class ConfocalLogic(GenericLogic):
             self.depth_img_is_xz = self.depth_scan_dir_is_xz
             # depth scan is in xz plane
             if self.depth_img_is_xz:
-                #self._image_horz_axis = self._X
+                # self._image_horz_axis = self._X
                 # creates an image where each pixel will be [x,y,z,counts]
                 self.depth_image = np.zeros((
                         len(self._image_vert_axis),
                         len(self._X),
+                        # get_scanner_count_channels(): returns the list of strings of channels names
                         3 + len(self.get_scanner_count_channels())
                     ))
 
+                # fill the 3d array with dimensions len(self._image_vert_axis) x len(self._X)) x 3
+                # the values of the [:,:,0] 2d layer are new defined (according to xy_resolution) x values in arrays.
+                # for [:,:,1] 2d layer, the values are current y values
+                # for [:,:,2] 2d layer, the values are new defined (according to z_resolution) z values in arrays.
                 self.depth_image[:, :, 0] = np.full(
                     (len(self._image_vert_axis), len(self._X)), self._XL)
 
@@ -624,7 +637,6 @@ class ConfocalLogic(GenericLogic):
             self.set_position('scanner')
             return -1
 
-        # the "emit()" sends signal to the slot function, executing the slot codes
         self.signal_scan_lines_next.emit()
         return 0
 
@@ -664,6 +676,7 @@ class ConfocalLogic(GenericLogic):
 
         @return int: error code (0:OK, -1:error)
         """
+        # error checking codes in case of the scanner or components cannot close
         try:
             self._scanning_device.close_scanner()
         except Exception as e:
@@ -684,10 +697,10 @@ class ConfocalLogic(GenericLogic):
 
         @param string tag: TODO
 
-        @param float x: if defined, changes to postion in x-direction (microns)
-        @param float y: if defined, changes to postion in y-direction (microns)
-        @param float z: if defined, changes to postion in z-direction (microns)
-        @param float a: if defined, changes to postion in a-direction (microns)
+        @param float x: if defined, changes to position in x-direction (microns)
+        @param float y: if defined, changes to position in y-direction (microns)
+        @param float z: if defined, changes to position in z-direction (microns)
+        @param float a: if defined, changes to position in a-direction (microns)
 
         @return int: error code (0:OK, -1:error)
         """
@@ -705,6 +718,7 @@ class ConfocalLogic(GenericLogic):
         if self.module_state() == 'locked' or self._scanning_device.module_state() == 'locked':
             return -1
         else:
+            # change the position of the scanner to the GUI indicated position (tag string needed to be defined)
             self._change_position(tag)
             self.signal_change_position.emit(tag)
             return 0
