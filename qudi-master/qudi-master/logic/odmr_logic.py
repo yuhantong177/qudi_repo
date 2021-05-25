@@ -41,7 +41,10 @@ class ODMRLogic(GenericLogic):
     _modclass = 'odmrlogic'
     _modtype = 'logic'
 
-    # declare connectors
+    # declare connectors (defined in core/module.py file)
+    # a connector's first param is the name of connector (not used in the functions here)
+    # second param is the interface class or name
+    # third param is a boolean variable, indicating optionality of the connector (not used here)
     odmrcounter = Connector(interface='ODMRCounterInterface')
     fitlogic = Connector(interface='FitLogic')
     microwave1 = Connector(interface='mwsourceinterface')
@@ -55,17 +58,20 @@ class ODMRLogic(GenericLogic):
                     missing='warn',
                     converter=lambda x: MicrowaveMode[x.upper()])
 
+    # StatusVar is defined in core/module.py file
+    # in the functions below the first param is the identifier of status variable when being stored
+    # second param is the default variable for the status variable
     clock_frequency = StatusVar('clock_frequency', 200)
     cw_mw_frequency = StatusVar('cw_mw_frequency', 2870e6)
     cw_mw_power = StatusVar('cw_mw_power', -30)
     sweep_mw_power = StatusVar('sweep_mw_power', -30)
-    mw_start = StatusVar('mw_start', 2800e6)
+    mw_start = StatusVar('mw_start', 2800e6) # the measurement goes from 2.8GHz to 2.95GHz
     mw_stop = StatusVar('mw_stop', 2950e6)
-    mw_step = StatusVar('mw_step', 2e6)
-    run_time = StatusVar('run_time', 60)
-    number_of_lines = StatusVar('number_of_lines', 50)
-    fc = StatusVar('fits', None)
-    lines_to_average = StatusVar('lines_to_average', 0)
+    mw_step = StatusVar('mw_step', 2e6) # each data point in the count measurement is 2MHz apart from the next one
+    run_time = StatusVar('run_time', 60) # every run is 60 seconds in default
+    number_of_lines = StatusVar('number_of_lines', 50) # matrix lines that shows up in the graph
+    fc = StatusVar('fits', None) # default fit (none)
+    lines_to_average = StatusVar('lines_to_average', 0) # non-smoothed data
     _oversampling = StatusVar('oversampling', default=10)
     _lock_in_active = StatusVar('lock_in_active', default=False)
 
@@ -73,6 +79,7 @@ class ODMRLogic(GenericLogic):
     sigNextLine = QtCore.Signal()
 
     # Update signals, e.g. for GUI module
+    # signal explained in confocal_logic.py
     sigParameterUpdated = QtCore.Signal(dict)
     sigOutputStateUpdated = QtCore.Signal(str, bool)
     sigOdmrPlotsUpdated = QtCore.Signal(np.ndarray, np.ndarray, np.ndarray)
@@ -113,7 +120,7 @@ class ODMRLogic(GenericLogic):
         self.mw_trigger_pol = TriggerEdge.RISING
         self.set_trigger(self.mw_trigger_pol, self.clock_frequency)
 
-        # Elapsed measurement time and number of sweeps
+        # Elapsed measurement time and number of sweeps (starts from 0)
         self.elapsed_time = 0.0
         self.elapsed_sweeps = 0
 
@@ -123,7 +130,7 @@ class ODMRLogic(GenericLogic):
         # for clearing the ODMR data during a measurement
         self._clearOdmrData = False
 
-        # Initalize the ODMR data arrays (mean signal and sweep matrix)
+        # Initialize the ODMR data arrays (mean signal and sweep matrix)
         self._initialize_odmr_plots()
         # Raw data array
         self.odmr_raw_data = np.zeros(
@@ -147,7 +154,7 @@ class ODMRLogic(GenericLogic):
         # Stop measurement if it is still running
         if self.module_state() == 'locked':
             self.stop_odmr_scan()
-        timeout = 30.0
+        timeout = 30.0 # in seconds
         start_time = time.time()
         # checks the timeout value left every 0.5 seconds. If the timeout is not positive, output error message
         while self.module_state() == 'locked':
@@ -164,12 +171,15 @@ class ODMRLogic(GenericLogic):
 
     # a lorentzian fit is primarily for one single mode system
     # whereas a gaussian fit is for a distribution of modes
+    # this function is to set the options for fitting methods
     @fc.constructor
     def sv_set_fits(self, val):
         # Setup fit container
+        # fit container class is defined in logic/fit_logic.py file
         fc = self.fitlogic().make_fit_container('ODMR sum', '1d')
-        fc.set_units(['Hz', 'c/s'])
+        fc.set_units(['Hz', 'c/s']) # set units for the fit
         if isinstance(val, dict) and len(val) > 0:
+            # Take a list of fits from a storable dictionary, load to self.fit_list and check
             fc.load_from_dict(val)
         else:
             d1 = OrderedDict()
@@ -195,7 +205,7 @@ class ODMRLogic(GenericLogic):
                 }
             default_fits = OrderedDict()
             default_fits['1d'] = d1
-            fc.load_from_dict(default_fits)
+            fc.load_from_dict(default_fits) # defined around line 183
         return fc
 
     @fc.representer
@@ -206,6 +216,8 @@ class ODMRLogic(GenericLogic):
         else:
             return None
 
+    # initialize the plots before starting (determine the range of measurement and put 0's as counts)
+    # fit x range has the same of plot x range and fit y has the same size of fit x
     def _initialize_odmr_plots(self):
         """ Initializing the ODMR plots (line and matrix). """
         self.odmr_plot_x = np.arange(self.mw_start, self.mw_stop + self.mw_step, self.mw_step)
@@ -214,8 +226,9 @@ class ODMRLogic(GenericLogic):
         self.odmr_fit_y = np.zeros(self.odmr_fit_x.size)
         self.odmr_plot_xy = np.zeros(
             [self.number_of_lines, len(self.get_odmr_channels()), self.odmr_plot_x.size])
+        # the "emit()" sends signal to the slot function, executing the slot codes
         self.sigOdmrPlotsUpdated.emit(self.odmr_plot_x, self.odmr_plot_y, self.odmr_plot_xy)
-        current_fit = self.fc.current_fit
+        current_fit = self.fc.current_fit # default is 'No Fit'
         self.sigOdmrFitUpdated.emit(self.odmr_fit_x, self.odmr_fit_y, {}, current_fit)
         return
 
@@ -236,6 +249,7 @@ class ODMRLogic(GenericLogic):
             frequency = frequency / self._oversampling
 
         if self.module_state() != 'locked':
+            # mw_trigger_pol defined near line 120
             self.mw_trigger_pol, triggertime = self._mw_device.set_ext_trigger(trigger_pol, 1/frequency)
         else:
             self.log.warning('set_trigger failed. Logic is locked.')
@@ -592,6 +606,7 @@ class ODMRLogic(GenericLogic):
                 self.log.error('Can not start ODMR scan. Logic is already locked.')
                 return -1
 
+            # mw_trigger_pol defined near line 120
             self.set_trigger(self.mw_trigger_pol, self.clock_frequency)
 
             # lock the module after it starts running
@@ -599,6 +614,7 @@ class ODMRLogic(GenericLogic):
             self.module_state.lock()
             self._clearOdmrData = False
             self.stopRequested = False
+            # Reset fit result and fit parameters from result for this container.
             self.fc.clear_result()
 
             self.elapsed_sweeps = 0
@@ -623,7 +639,8 @@ class ODMRLogic(GenericLogic):
             self._initialize_odmr_plots()
             # initialize raw_data array with zeroes
             estimated_number_of_lines = self.run_time * self.clock_frequency / self.odmr_plot_x.size
-            estimated_number_of_lines = int(1.5 * estimated_number_of_lines)  # Safety
+            # Safety (make sure there are enough lines for data recording)
+            estimated_number_of_lines = int(1.5 * estimated_number_of_lines)
             if estimated_number_of_lines < self.number_of_lines:
                 estimated_number_of_lines = self.number_of_lines
             self.log.debug('Estimated number of raw data lines: {0:d}'
@@ -650,7 +667,7 @@ class ODMRLogic(GenericLogic):
 
             self.module_state.lock()
             self.stopRequested = False
-            self.fc.clear_result()
+            self.fc.clear_result() # explained around line 617
 
             self._startTime = time.time() - self.elapsed_time
             self.sigOdmrElapsedTimeUpdated.emit(self.elapsed_time, self.elapsed_sweeps)
@@ -781,7 +798,7 @@ class ODMRLogic(GenericLogic):
         return self._odmr_counter.get_odmr_channels()
 
     def get_hw_constraints(self):
-        """ Return the names of all ocnfigured fit functions.
+        """ Return the names of all configured fit functions.
         @return object: Hardware constraints object
         """
         constraints = self._mw_device.get_limits()
@@ -791,7 +808,7 @@ class ODMRLogic(GenericLogic):
         """ Return the hardware constraints/limits
         @return list(str): list of fit function names
         """
-        return list(self.fc.fit_list)
+        return list(self.fc.fit_list) # fit_list value given by OrderedDict()
 
     def do_fit(self, fit_function=None, x_data=None, y_data=None, channel_index=0):
         """
@@ -803,14 +820,17 @@ class ODMRLogic(GenericLogic):
 
         if fit_function is not None and isinstance(fit_function, str):
             if fit_function in self.get_fit_functions():
+                # Checks and sets the current fit for this container by name.
                 self.fc.set_current_fit(fit_function)
             else:
+                # Enter 'No Fit' for the param if fit_function is NONE or non-string
                 self.fc.set_current_fit('No Fit')
                 if fit_function != 'No Fit':
                     self.log.warning('Fit function "{0}" not available in ODMRLogic fit container.'
                                      ''.format(fit_function))
 
-        self.odmr_fit_x, self.odmr_fit_y, result = self.fc.do_fit(x_data, y_data)
+        # variable result is the fitted measured data by selected fit method
+        elf.odmr_fit_x, self.odmr_fit_y, result = self.fc.do_fit(x_data, y_data)
 
         if result is None:
             result_str_dict = {}
@@ -1014,7 +1034,7 @@ class ODMRLogic(GenericLogic):
 
     def perform_odmr_measurement(self, freq_start, freq_step, freq_stop, power, channel, runtime,
                                  fit_function='No Fit', save_after_meas=True, name_tag=''):
-        """ An independant method, which can be called by a task with the proper input values
+        """ An independent method, which can be called by a task with the proper input values
             to perform an odmr measurement.
 
         @return
