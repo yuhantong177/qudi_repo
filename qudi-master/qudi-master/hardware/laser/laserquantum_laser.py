@@ -19,8 +19,7 @@ Copyright (c) the Qudi Developers. See the COPYRIGHT.txt file at the
 top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi/>
 """
 
-from core.module import Base
-from core.configoption import ConfigOption
+from core.module import Base, ConfigOption
 from interface.simple_laser_interface import SimpleLaserInterface
 from interface.simple_laser_interface import ControlMode
 from interface.simple_laser_interface import ShutterState
@@ -51,6 +50,8 @@ class LaserQuantumLaser(Base, SimpleLaserInterface):
         psu: 'SMD6000'
 
     """
+    _modclass = 'lqlaser'
+    _modtype = 'hardware'
 
     serial_interface = ConfigOption('interface', 'ASRL1::INSTR', missing='warn')
     maxpower = ConfigOption('maxpower', 0.250, missing='warn')

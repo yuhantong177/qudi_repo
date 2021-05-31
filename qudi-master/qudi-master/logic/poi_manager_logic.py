@@ -26,8 +26,7 @@ import numpy as np
 import time
 
 from collections import OrderedDict
-from core.connector import Connector
-from core.statusvariable import StatusVar
+from core.module import Connector, StatusVar
 from datetime import datetime
 from logic.generic_logic import GenericLogic
 from qtpy import QtCore
@@ -354,6 +353,8 @@ class PoiManagerLogic(GenericLogic):
     """
     This is the Logic class for mapping and tracking bright features in the confocal scan.
     """
+    _modclass = 'poimanagerlogic'
+    _modtype = 'logic'
 
     # declare connectors
     optimiserlogic = Connector(interface='OptimizerLogic')

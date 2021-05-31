@@ -19,9 +19,7 @@ top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi
 
 """
 
-from core.module import Base
-from core.configoption import ConfigOption
-from core.statusvariable import StatusVar
+from core.module import Base, ConfigOption, StatusVar
 from interface.spectrometer_interface import SpectrometerInterface
 import numpy as np
 import seabreeze.spectrometers as sb

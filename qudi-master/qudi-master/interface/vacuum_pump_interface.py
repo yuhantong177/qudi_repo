@@ -19,21 +19,15 @@ Copyright (c) the Qudi Developers. See the COPYRIGHT.txt file at the
 top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi/>
 """
 
-from core.interface import abstract_interface_method
-from core.meta import InterfaceMetaclass
+import abc
+from core.util.interfaces import InterfaceMetaclass
 
 
 class VacuumPumpInterface(metaclass=InterfaceMetaclass):
-    """ This interface can be used to control a vacuum pump.
+    _modtype = 'PumpInterface'
+    _modclass = 'interface'
 
-    This interface, while functional, is not used by any hardware nor logic at the moment.
-    Also it has no dummy associated with it.
-
-    TODO: Improve documentation - Some methods are not crystal clear and no hardwre/logic to infer from.
-
-    """
-
-    @abstract_interface_method
+    @abc.abstractmethod
     def get_extra_info(self):
         """ Present extra information about pump controller/device.
 
@@ -41,7 +35,7 @@ class VacuumPumpInterface(metaclass=InterfaceMetaclass):
         """
         pass
 
-    @abstract_interface_method
+    @abc.abstractmethod
     def get_pressures(self):
         """All available pressures in Pascal.
 
@@ -49,11 +43,11 @@ class VacuumPumpInterface(metaclass=InterfaceMetaclass):
         """
         pass
 
-    @abstract_interface_method
+    @abc.abstractmethod
     def get_pump_speeds(self):
         pass
 
-    @abstract_interface_method
+    @abc.abstractmethod
     def get_pump_powers(self):
         """ All available pump powers in watts.
 
@@ -61,7 +55,7 @@ class VacuumPumpInterface(metaclass=InterfaceMetaclass):
         """
         pass
 
-    @abstract_interface_method
+    @abc.abstractmethod
     def get_pump_states(self):
         """All available pump states.
 
@@ -69,20 +63,20 @@ class VacuumPumpInterface(metaclass=InterfaceMetaclass):
         """
         pass
 
-    @abstract_interface_method
+    @abc.abstractmethod
     def set_pump_states(self, states):
         """Control the pump state.
           @param dict states: dict of pump name and desired state
         """
         pass
 
-    @abstract_interface_method
+    @abc.abstractmethod
     def get_system_state(self):
         """Get overall system state.
         """
         pass
 
-    @abstract_interface_method
+    @abc.abstractmethod
     def set_system_state(self, state):
         """Control the system state.
         """

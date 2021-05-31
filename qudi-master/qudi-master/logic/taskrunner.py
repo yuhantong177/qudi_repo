@@ -83,12 +83,13 @@ class TaskListTableModel(ListTableModel):
                         )
                 )
 
-
 class TaskRunner(GenericLogic):
     """ This module keeps a collection of tasks that have varying preconditions,
         postconditions and conflicts and executes these tasks as their given
         conditions allow.
     """
+    _modclass = 'TaskRunner'
+    _modtype = 'Logic'
 
     sigLoadTasks = QtCore.Signal()
     sigCheckTasks = QtCore.Signal()

@@ -21,15 +21,18 @@ Copyright (c) the Qudi Developers. See the COPYRIGHT.txt file at the
 top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi/>
 """
 
-from core.interface import abstract_interface_method
-from core.meta import InterfaceMetaclass
+import abc
+from core.util.interfaces import InterfaceMetaclass
 
 
 class CameraInterface(metaclass=InterfaceMetaclass):
     """ This interface is used to manage and visualize a simple camera
     """
 
-    @abstract_interface_method
+    _modtype = 'CameraInterface'
+    _modclass = 'interface'
+
+    @abc.abstractmethod
     def get_name(self):
         """ Retrieve an identifier of the camera that the GUI can print
 
@@ -37,7 +40,7 @@ class CameraInterface(metaclass=InterfaceMetaclass):
         """
         pass
 
-    @abstract_interface_method
+    @abc.abstractmethod
     def get_size(self):
         """ Retrieve size of the image in pixel
 
@@ -45,7 +48,7 @@ class CameraInterface(metaclass=InterfaceMetaclass):
         """
         pass
 
-    @abstract_interface_method
+    @abc.abstractmethod
     def support_live_acquisition(self):
         """ Return whether or not the camera can take care of live acquisition
 
@@ -53,7 +56,7 @@ class CameraInterface(metaclass=InterfaceMetaclass):
         """
         pass
 
-    @abstract_interface_method
+    @abc.abstractmethod
     def start_live_acquisition(self):
         """ Start a continuous acquisition
 
@@ -61,7 +64,7 @@ class CameraInterface(metaclass=InterfaceMetaclass):
         """
         pass
 
-    @abstract_interface_method
+    @abc.abstractmethod
     def start_single_acquisition(self):
         """ Start a single acquisition
 
@@ -69,7 +72,7 @@ class CameraInterface(metaclass=InterfaceMetaclass):
         """
         pass
 
-    @abstract_interface_method
+    @abc.abstractmethod
     def stop_acquisition(self):
         """ Stop/abort live or single acquisition
 
@@ -77,7 +80,8 @@ class CameraInterface(metaclass=InterfaceMetaclass):
         """
         pass
 
-    @abstract_interface_method
+
+    @abc.abstractmethod
     def get_acquired_data(self):
         """ Return an array of last acquired image.
 
@@ -87,17 +91,17 @@ class CameraInterface(metaclass=InterfaceMetaclass):
         """
         pass
 
-    @abstract_interface_method
+    @abc.abstractmethod
     def set_exposure(self, exposure):
         """ Set the exposure time in seconds
 
-        @param float exposure: desired new exposure time
+        @param float time: desired new exposure time
 
         @return float: setted new exposure time
         """
         pass
 
-    @abstract_interface_method
+    @abc.abstractmethod
     def get_exposure(self):
         """ Get the exposure time in seconds
 
@@ -105,7 +109,8 @@ class CameraInterface(metaclass=InterfaceMetaclass):
         """
         pass
 
-    @abstract_interface_method
+
+    @abc.abstractmethod
     def set_gain(self, gain):
         """ Set the gain
 
@@ -115,7 +120,7 @@ class CameraInterface(metaclass=InterfaceMetaclass):
         """
         pass
 
-    @abstract_interface_method
+    @abc.abstractmethod
     def get_gain(self):
         """ Get the gain
 
@@ -123,10 +128,13 @@ class CameraInterface(metaclass=InterfaceMetaclass):
         """
         pass
 
-    @abstract_interface_method
+
+    @abc.abstractmethod
     def get_ready_state(self):
         """ Is the camera ready for an acquisition ?
 
         @return bool: ready ?
         """
         pass
+
+

@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Use a Windows event to interrupt a child process like SIGINT.
+"""Use a Windows event to interrupt a child process like SIGINT.
 
 The child needs to explicitly listen for this - see
 ipykernel.parentpoller.ParentPollerWindows for a Python implementation.
@@ -12,7 +10,6 @@ Distributed under the terms of the Modified BSD License.
 """
 
 import ctypes
-
 
 def create_interrupt_event():
     """Create an interrupt event handle.
@@ -41,7 +38,6 @@ def create_interrupt_event():
         False, # bManualReset
         False, # bInitialState
         '')    # lpName
-
 
 def send_interrupt(interrupt_handle):
     """ Sends an interrupt event using the specified handle.

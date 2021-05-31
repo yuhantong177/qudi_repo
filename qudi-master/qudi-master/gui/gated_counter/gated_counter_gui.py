@@ -24,7 +24,7 @@ import numpy as np
 import os
 import pyqtgraph as pg
 
-from core.connector import Connector
+from core.module import Connector
 from core.util import units
 from gui.guibase import GUIBase
 from gui.colordefs import QudiPalettePale as palette
@@ -47,12 +47,14 @@ class GatedCounterMainWindow(QtWidgets.QMainWindow):
         uic.loadUi(ui_file, self)
         self.show()
 
-
 class GatedCounterGui(GUIBase):
     """ Main GUI for the Gated Counting. """
 
-    # declare connectors
-    gatedcounterlogic1 = Connector(interface='CounterLogic')
+    _modclass = 'GatedCounterGui'
+    _modtype = 'gui'
+
+    ## declare connectors
+    gatedcounterlogic1 = Connector(interface='GatedCounterLogic')
     traceanalysislogic1 = Connector(interface='TraceAnalysisLogic')
 
 

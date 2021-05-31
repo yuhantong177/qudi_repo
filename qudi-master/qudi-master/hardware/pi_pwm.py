@@ -20,8 +20,7 @@ top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi
 """
 
 
-from core.module import Base
-from core.configoption import ConfigOption
+from core.module import Base, ConfigOption
 from interface.process_control_interface import ProcessControlInterface
 from core.util.mutex import Mutex
 
@@ -39,6 +38,10 @@ class PiPWM(Base, ProcessControlInterface):
         frequency: 100 # in Hz
 
     """
+
+    _modclass = 'ProcessControlInterface'
+    _modtype = 'hardware'
+
     channel = ConfigOption('channel', 0, missing='warn')
     freq = ConfigOption('frequency', 100)
 

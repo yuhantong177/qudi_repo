@@ -23,12 +23,15 @@ import scipy.integrate as integrate
 from scipy.interpolate import InterpolatedUnivariateSpline
 from collections import OrderedDict
 
-from core.connector import Connector
+from core.module import Connector
 from logic.generic_logic import GenericLogic
 
 
 class TraceAnalysisLogic(GenericLogic):
     """ Perform a gated counting measurement with the hardware.  """
+
+    _modclass = 'TraceAnalysisLogic'
+    _modtype = 'logic'
 
     # declare connectors
     counterlogic1 = Connector(interface='CounterLogic')

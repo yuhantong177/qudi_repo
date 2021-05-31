@@ -28,8 +28,7 @@ from enum import Enum
 from ctypes import *
 import numpy as np
 
-from core.module import Base
-from core.configoption import ConfigOption
+from core.module import Base, ConfigOption
 
 from interface.camera_interface import CameraInterface
 
@@ -118,6 +117,9 @@ class IxonUltra(Base, CameraInterface):
         default_trigger_mode: 'INTERNAL'
 
     """
+
+    _modtype = 'camera'
+    _modclass = 'hardware'
 
     _dll_location = ConfigOption('dll_location', missing='error')
     _default_exposure = ConfigOption('default_exposure', 1.0)

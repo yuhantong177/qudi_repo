@@ -20,23 +20,21 @@ Copyright (c) the Qudi Developers. See the COPYRIGHT.txt file at the
 top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi/>
 """
 
-from core.interface import abstract_interface_method
-from core.meta import InterfaceMetaclass
+import abc
+from core.util.interfaces import InterfaceMetaclass
 
 
 class SimpleDataInterface(metaclass=InterfaceMetaclass):
-    """ An interface to get read one or multiple values from a device.
 
-    Deprecated : This interface is redundant with process_interface. Please use the other if possible?
-    TODO: Remove in future versions ?
-    """
+    _modtype = 'SimpleDataInterface'
+    _modclass = 'interface'
 
-    @abstract_interface_method
+    @abc.abstractmethod
     def getData(self):
         """ Return a measured value """
         pass
 
-    @abstract_interface_method
+    @abc.abstractmethod
     def getChannels(self):
         """ Return number of channels for value """
         pass

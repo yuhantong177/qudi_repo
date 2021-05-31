@@ -25,10 +25,8 @@ import time
 
 from collections import OrderedDict
 
-from core.module import Base
-from core.configoption import ConfigOption
+from core.module import Base, ConfigOption
 from interface.motor_interface import MotorInterface
-
 
 class MotorStagePI(Base, MotorInterface):
     """unstable: Christoph Müller, Simon Schmitt
@@ -73,6 +71,8 @@ class MotorStagePI(Base, MotorInterface):
         vel_third_axis_step: 1e-5 # in m/s
 
     """
+    _modclass = 'MotorStagePI'
+    _modtype = 'hardware'
 
     _com_port_pi_xyz = ConfigOption('com_port_pi_xyz', 'ASRL1::INSTR', missing='warn')
     _pi_xyz_baud_rate = ConfigOption('pi_xyz_baud_rate', 9600, missing='warn')

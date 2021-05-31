@@ -31,10 +31,7 @@ import tempfile
 
 import config
 
-try:
-    from .parentpoller import ParentPollerUnix, ParentPollerWindows
-except ImportError:
-    from parentpoller import ParentPollerUnix, ParentPollerWindows
+from parentpoller import ParentPollerUnix, ParentPollerWindows
 
 rpyc.core.protocol.DEFAULT_CONFIG['allow_pickle'] = True
 

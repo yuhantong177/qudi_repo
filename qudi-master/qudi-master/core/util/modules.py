@@ -134,12 +134,9 @@ def toposort(deps, cost=None):
     return order
 
 
-def is_base(base):
+def isBase(base):
     """Is the given base one of the three allowed ones?
-
-    @param str base: The base module type to check
-
-    @return bool: base is allowed
+      @return bool: base is allowed
     """
     return base in ('hardware', 'logic', 'gui')
 

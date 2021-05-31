@@ -24,7 +24,7 @@ import os
 import pyqtgraph as pg
 
 from collections import OrderedDict
-from core.connector import Connector
+from core.module import Connector
 from gui.colordefs import ColorScaleInferno
 from gui.guibase import GUIBase
 from gui.guiutils import ColorBar
@@ -50,9 +50,11 @@ class VoltScanGui(GUIBase):
     """
 
     """
+    _modclass = 'VoltScanGui'
+    _modtype = 'gui'
     
-    # declare connectors
-    voltagescannerlogic1 = Connector(interface='LaserScannerLogic')
+    ## declare connectors
+    voltagescannerlogic1 = Connector(interface='VoltageScannerLogic')
     savelogic = Connector(interface='SaveLogic')
 
     sigStartScan = QtCore.Signal()

@@ -25,8 +25,7 @@ top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi
 import numpy as np
 from scipy.interpolate import interp1d
 
-from core.connector import Connector
-from core.configoption import ConfigOption
+from core.module import Connector, ConfigOption
 from logic.generic_logic import GenericLogic
 from interface.simple_laser_interface import SimpleLaserInterface, ControlMode, ShutterState, LaserState
 
@@ -41,6 +40,9 @@ class LaserAomInterfuse(GenericLogic, SimpleLaserInterface):
     (power over maximum power) and the second column the associated voltage.
     This data is interpolated to define the power/voltage function
     """
+
+    _modclass = 'LaserAomInterfuse'
+    _modtype = 'interfuse'
 
     # connector to the confocal scanner hardware that has analog output feature
     scanner = Connector(interface='ConfocalScannerInterface')

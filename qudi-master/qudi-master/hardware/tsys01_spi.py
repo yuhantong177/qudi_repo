@@ -20,8 +20,7 @@ Copyright (c) the Qudi Developers. See the COPYRIGHT.txt file at the
 top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi/>
 """
 
-from core.module import Base
-from core.configoption import ConfigOption
+from core.module import Base, ConfigOption
 from interface.process_interface import ProcessInterface
 from core.util.mutex import Mutex
 
@@ -41,6 +40,10 @@ class TSYS01SPI(Base, ProcessInterface):
         device: 0
 
     """
+
+    _modclass = 'TSYS01'
+    _modtype = 'hardware'
+
     # config opts
     bus = ConfigOption('bus', default=0, missing='warn')
     device = ConfigOption('device', default=0, missing='warn')

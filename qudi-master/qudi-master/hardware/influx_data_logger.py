@@ -19,8 +19,7 @@ Copyright (c) the Qudi Developers. See the COPYRIGHT.txt file at the
 top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi/>
 """
 
-from core.module import Base
-from core.configoption import ConfigOption
+from core.module import Base, ConfigOption
 from interface.data_logger_interface import DataLoggerInterface
 
 from influxdb import InfluxDBClient
@@ -43,6 +42,9 @@ class InfluxLogger(Base, DataLoggerInterface):
 
     """
 
+    _modclass = 'InfluxLogger'
+    _modtype = 'hardware'
+
     user = ConfigOption('user', missing='error')
     pw = ConfigOption('password', missing='error')
     dbname = ConfigOption('dbname', missing='error')
@@ -51,6 +53,7 @@ class InfluxLogger(Base, DataLoggerInterface):
     series = ConfigOption('dataseries', missing='error')
     field = ConfigOption('field', missing='error')
     cr = ConfigOption('criterion', missing='error')
+
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

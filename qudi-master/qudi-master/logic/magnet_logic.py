@@ -25,8 +25,7 @@ import numpy as np
 import time
 
 from collections import OrderedDict
-from core.connector import Connector
-from core.statusvariable import StatusVar
+from core.module import Connector, ConfigOption, StatusVar
 from logic.generic_logic import GenericLogic
 from qtpy import QtCore
 from interface.slow_counter_interface import CountingMode
@@ -64,15 +63,18 @@ class MagnetLogic(GenericLogic):
     ---
     """
 
-    # declare connectors
+    _modclass = 'MagnetLogic'
+    _modtype = 'logic'
+
+    ## declare connectors
     magnetstage = Connector(interface='MagnetInterface')
     optimizerlogic = Connector(interface='OptimizerLogic')
     counterlogic = Connector(interface='CounterLogic')
     odmrlogic = Connector(interface='ODMRLogic')
     savelogic = Connector(interface='SaveLogic')
-    scannerlogic = Connector(interface='ConfocalLogic')
+    scannerlogic = Connector(interface='ScannerLogic')
     traceanalysis = Connector(interface='TraceAnalysisLogic')
-    gatedcounterlogic = Connector(interface='CounterLogic')
+    gatedcounterlogic = Connector(interface='GatedCounterLogic')
     sequencegeneratorlogic = Connector(interface='SequenceGeneratorLogic')
 
     align_2d_axis0_range = StatusVar('align_2d_axis0_range', 10e-3)

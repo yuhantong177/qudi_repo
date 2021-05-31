@@ -26,8 +26,7 @@ top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi
 import visa
 import time
 
-from core.module import Base
-from core.configoption import ConfigOption
+from core.module import Base, ConfigOption
 from interface.microwave_interface import MicrowaveInterface
 from interface.microwave_interface import MicrowaveLimits
 from interface.microwave_interface import MicrowaveMode
@@ -46,6 +45,8 @@ class MicrowaveAnritsuMG369x(Base, MicrowaveInterface):
         gpib_timeout: 10 # in seconds
 
     """
+    _modclass = 'MicrowaveAanritsu70GHz'
+    _modtype = 'hardware'
 
     _gpib_address = ConfigOption('gpib_address', missing='error')
     _gpib_timeout = ConfigOption('gpib_timeout', 10, missing='warn')

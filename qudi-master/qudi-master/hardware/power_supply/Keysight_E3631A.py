@@ -20,8 +20,7 @@ top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi
 import time
 import visa
 
-from core.module import Base
-from core.configoption import ConfigOption
+from core.module import Base, ConfigOption
 from interface.process_control_interface import ProcessControlInterface
 
 
@@ -34,6 +33,8 @@ class E3631A(Base, ProcessControlInterface):
             address: 'ASRL9::INSTR'
 
     """
+    _modclass = 'powersupply'
+    _modtype = 'hardware'
 
     _address = ConfigOption('address', missing='error')
 

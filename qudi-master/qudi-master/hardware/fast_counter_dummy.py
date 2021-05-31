@@ -24,8 +24,7 @@ import time
 import os
 import numpy as np
 
-from core.module import Base
-from core.configoption import ConfigOption
+from core.module import Base, ConfigOption
 from core.util.modules import get_main_dir
 from interface.fast_counter_interface import FastCounterInterface
 
@@ -41,6 +40,8 @@ class FastCounterDummy(Base, FastCounterInterface):
         #load_trace: None # path to the saved dummy trace
 
     """
+    _modclass = 'fastcounterinterface'
+    _modtype = 'hardware'
 
     # config option
     _gated = ConfigOption('gated', False, missing='warn')

@@ -23,7 +23,7 @@ top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi
 import numpy as np
 import os
 
-from core.connector import Connector
+from core.module import Connector
 from gui.guibase import GUIBase
 from gui.colordefs import QudiPalettePale as palette
 from qtpy import QtWidgets
@@ -48,7 +48,10 @@ class SimpleMainWindow(QtWidgets.QMainWindow):
 class SimpleDataGui(GUIBase):
     """ FIXME: Please document
     """
-    # declare connectors
+    _modclass = 'simplegui'
+    _modtype = 'gui'
+
+    ## declare connectors
     simplelogic = Connector(interface='SimpleDataLogic')
 
     sigStart = QtCore.Signal()

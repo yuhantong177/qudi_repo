@@ -42,6 +42,9 @@ class MotorDummy(Base, MotorInterface):
 
     """
 
+    _modclass = 'MotorDummy'
+    _modtype = 'hardware'
+
     def __init__(self, config, **kwargs):
         super().__init__(config=config, **kwargs)
 

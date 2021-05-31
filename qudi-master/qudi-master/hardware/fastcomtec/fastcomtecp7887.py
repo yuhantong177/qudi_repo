@@ -24,8 +24,7 @@ top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi
 #TODO: What does get status do or need as return?
 #TODO: Check if there are more modules which are missing, and more settings for FastComtec which need to be put, should we include voltage threshold?
 
-from core.module import Base
-from core.configoption import ConfigOption
+from core.module import Base, ConfigOption
 from core.util.modules import get_main_dir
 from interface.fast_counter_interface import FastCounterInterface
 import time
@@ -146,10 +145,11 @@ class ACQDATA(ctypes.Structure):
                 ('hct', ctypes.c_int), ]
 
 
+
 class FastComtec(Base, FastCounterInterface):
     """ Hardware Class for the FastComtec Card.
 
-    This module is also compatible with model 7889 by specifying the model config option.
+    unstable: Jochen Scheuer, Simon Schmitt
 
     Example config for copy-paste:
 
@@ -162,12 +162,12 @@ class FastComtec(Base, FastCounterInterface):
 
     """
 
+    _modclass = 'FastComtec'
+    _modtype = 'hardware'
     gated = ConfigOption('gated', False, missing='warn')
     trigger_safety = ConfigOption('trigger_safety', 200e-9, missing='warn')
     aom_delay = ConfigOption('aom_delay', 400e-9, missing='warn')
     minimal_binwidth = ConfigOption('minimal_binwidth', 0.25e-9, missing='warn')
-    model = ConfigOption('model', '7887')
-    use_dma = ConfigOption('use_dma', False)
 
     def __init__(self, config, **kwargs):
         super().__init__(config=config, **kwargs)
@@ -185,8 +185,7 @@ class FastComtec(Base, FastCounterInterface):
     def on_activate(self):
         """ Initialisation performed during activation of the module.
         """
-        dll_name = 'dp{}.dll'.format(self.model)
-        self.dll = ctypes.windll.LoadLibrary(dll_name)
+        self.dll = ctypes.windll.LoadLibrary('dp7887.dll')
         if self.gated:
             self.change_sweep_mode(gated=True)
         else:
@@ -318,14 +317,10 @@ class FastComtec(Base, FastCounterInterface):
         """
         Returns the current sweeps.
         @return int sweeps: in sweeps
-
-        The fastcomtec has "start" and "sweep" parameters that are generally equal but might differ depending on the
-        configuration. Here the number of trigger events is called "start". This is what is meant by the "sweep"
-        parameter of the fast_counter interface.
         """
         status = AcqStatus()
         self.dll.GetStatusData(ctypes.byref(status), 0)
-        return status.stevents  # the number of trigger is named "stevents".
+        return status.sweeps
 
     def start_measure(self):
         """Start the measurement. """
@@ -526,9 +521,7 @@ class FastComtec(Base, FastCounterInterface):
 
     def change_sweep_mode(self, gated):
         if gated:
-            number = 1978500
-            number = number + 32 if self.use_dma else number
-            cmd = 'sweepmode={0}'.format(hex(number))
+            cmd = 'sweepmode={0}'.format(hex(1978500))
             self.dll.RunCmd(0, bytes(cmd, 'ascii'))
             cmd = 'prena={0}'.format(hex(16)) #To select starts preset
             # cmd = 'prena={0}'.format(hex(4)) #To select sweeps preset
@@ -536,9 +529,7 @@ class FastComtec(Base, FastCounterInterface):
             self.gated = True
         else:
             # fastcomtch standard settings for ungated acquisition (check manual)
-            number = 1978496
-            number = number + 32 if self.use_dma else number
-            cmd = 'sweepmode={0}'.format(hex(number))
+            cmd = 'sweepmode={0}'.format(hex(1978496))
             self.dll.RunCmd(0, bytes(cmd, 'ascii'))
             cmd = 'prena={0}'.format(hex(0))
             self.dll.RunCmd(0, bytes(cmd, 'ascii'))

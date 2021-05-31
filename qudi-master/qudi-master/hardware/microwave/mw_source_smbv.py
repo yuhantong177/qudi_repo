@@ -27,8 +27,7 @@ import visa
 import time
 import numpy as np
 
-from core.module import Base
-from core.configoption import ConfigOption
+from core.module import Base, ConfigOption
 from interface.microwave_interface import MicrowaveInterface
 from interface.microwave_interface import MicrowaveLimits
 from interface.microwave_interface import MicrowaveMode
@@ -47,6 +46,9 @@ class MicrowaveSmbv(Base, MicrowaveInterface):
         gpib_timeout: 10
 
     """
+
+    _modclass = 'MicrowaveSmbv'
+    _modtype = 'hardware'
 
     # visa address of the hardware : this can be over ethernet, the name is here for
     # backward compatibility

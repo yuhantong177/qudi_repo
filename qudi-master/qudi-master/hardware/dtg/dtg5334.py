@@ -29,8 +29,7 @@ import visa
 from core.util.helpers import natural_sort
 
 from interface.pulser_interface import PulserInterface, PulserConstraints, SequenceOption
-from core.module import Base
-from core.configoption import ConfigOption
+from core.module import Base, ConfigOption
 
 
 class DTG5334(Base, PulserInterface):
@@ -43,6 +42,8 @@ class DTG5334(Base, PulserInterface):
         visa_address: 'GPIB0::12::INSTR'
 
     """
+    _modclass = 'dtg5334'
+    _modtype = 'hardware'
 
     visa_address = ConfigOption('visa_address', missing='error')
 

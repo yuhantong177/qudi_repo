@@ -27,9 +27,10 @@ import pyqtgraph as pg
 import pyqtgraph.exporters
 from qtpy import uic
 
-from core.connector import Connector
-from core.statusvariable import StatusVar
+from core.module import Connector, StatusVar
+from core.util.units import get_unit_prefix_dict
 from gui.colordefs import ColorScaleInferno
+from gui.colordefs import QudiPalettePale as palette
 from gui.guibase import GUIBase
 from gui.guiutils import ColorBar
 from qtpy import QtCore
@@ -94,7 +95,10 @@ class MagnetSettingsWindow(QtWidgets.QDialog):
 class MagnetGui(GUIBase):
     """ Main GUI for the magnet. """
 
-    # declare connectors
+    _modclass = 'MagnetGui'
+    _modtype = 'gui'
+
+    ## declare connectors
     magnetlogic1 = Connector(interface='MagnetLogic')
     savelogic = Connector(interface='SaveLogic')
 

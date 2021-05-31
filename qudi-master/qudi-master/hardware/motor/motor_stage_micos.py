@@ -25,10 +25,8 @@ import time
 
 from collections import OrderedDict
 
-from core.module import Base
-from core.configoption import ConfigOption
+from core.module import Base, ConfigOption
 from interface.motor_interface import MotorInterface
-
 
 class MotorStageMicos(Base, MotorInterface):
     """ Hardware class to define the controls for the Micos stage of PI.
@@ -87,9 +85,11 @@ class MotorStageMicos(Base, MotorInterface):
 
 
     """
+    _modclass = 'MotorStageMicos'
+    _modtype = 'hardware'
 
     unit_factor = 1000. # This factor converts the values given in m to mm.
-    # !!!!! Attention the units can be changed by setunit
+    ### !!!!! Attention the units can be changed by setunit
 
     _com_port_xy = ConfigOption('com_port_xy', 'COM4', missing='warn')
     _baud_rate_xy = ConfigOption('baud_rate_xy', 57600, missing='warn')

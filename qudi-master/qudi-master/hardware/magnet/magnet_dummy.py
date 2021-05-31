@@ -44,6 +44,10 @@ class MagnetDummy(Base, MagnetInterface):
         module.Class: 'magnet.magnet_dummy.MagnetDummy'
 
     """
+
+    _modtype = 'MagnetDummy'
+    _modclass = 'hardware'
+
     def __init__(self, config, **kwargs):
         super().__init__(config=config, **kwargs)
 

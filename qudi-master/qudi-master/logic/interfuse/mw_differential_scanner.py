@@ -21,9 +21,7 @@ top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi
 import time
 import numpy as np
 
-from core.module import Base
-from core.connector import Connector
-from core.configoption import ConfigOption
+from core.module import Base, Connector, ConfigOption
 from interface.confocal_scanner_interface import ConfocalScannerInterface
 
 
@@ -32,6 +30,8 @@ class ConfocalScannerInterfaceDummy(Base, ConfocalScannerInterface):
     """This is the Interface class to define the controls for the simple
     microwave hardware.
     """
+    _modclass = 'confocalscannerinterface'
+    _modtype = 'hardware'
 
     # connectors
     fitlogic = Connector(interface='FitLogic')

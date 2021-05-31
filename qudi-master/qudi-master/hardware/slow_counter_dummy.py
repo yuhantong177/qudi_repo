@@ -24,8 +24,7 @@ import numpy as np
 import random
 import time
 
-from core.module import Base
-from core.configoption import ConfigOption
+from core.module import Base, ConfigOption
 from interface.slow_counter_interface import SlowCounterInterface
 from interface.slow_counter_interface import SlowCounterConstraints
 from interface.slow_counter_interface import CountingMode
@@ -47,10 +46,14 @@ class SlowCounterDummy(Base, SlowCounterInterface):
 
     """
 
+    _modclass = 'SlowCounterDummy'
+    _modtype = 'hardware'
+
     # config
     _clock_frequency = ConfigOption('clock_frequency', 100, missing='warn')
     _samples_number = ConfigOption('samples_number', 10, missing='warn')
     source_channels = ConfigOption('source_channels', 2, missing='warn')
+
     dist = ConfigOption('count_distribution', 'dark_bright_gaussian')
 
     # 'No parameter "count_distribution" given in the configuration for the'

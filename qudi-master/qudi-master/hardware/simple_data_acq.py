@@ -21,8 +21,7 @@ top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi
 
 import visa
 
-from core.module import Base
-from core.configoption import ConfigOption
+from core.module import Base, ConfigOption
 from interface.simple_data_interface import SimpleDataInterface
 
 
@@ -37,6 +36,10 @@ class SimpleAcq(Base, SimpleDataInterface):
         baudrate: 115200
 
     """
+
+    _modclass = 'simple'
+    _modtype = 'hardware'
+
     resource = ConfigOption('interface', 'ASRL1::INSTR', missing='warn')
     baudrate = ConfigOption('baudrate', 115200, missing='warn')
 

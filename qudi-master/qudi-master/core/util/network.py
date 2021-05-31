@@ -22,7 +22,6 @@ top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi
 import rpyc.core.netref
 import rpyc.utils.classic
 
-
 def netobtain(obj):
     """
     """

@@ -29,8 +29,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import time
 
-from core.connector import Connector
-from core.statusvariable import StatusVar
+from core.module import Connector, StatusVar
 from core.util.mutex import Mutex
 from logic.generic_logic import GenericLogic
 from qtpy import QtCore
@@ -43,6 +42,9 @@ class LaserScannerLogic(GenericLogic):
     """
 
     sig_data_updated = QtCore.Signal()
+
+    _modclass = 'laserscannerlogic'
+    _modtype = 'logic'
 
     # declare connectors
     confocalscanner1 = Connector(interface='ConfocalScannerInterface')

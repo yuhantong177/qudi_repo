@@ -22,8 +22,7 @@ top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi
 
 import numpy as np
 
-from core.connector import Connector
-from core.configoption import ConfigOption
+from core.module import Connector, ConfigOption, StatusVar
 from core.util.mutex import Mutex
 from logic.generic_logic import GenericLogic
 from qtpy import QtCore
@@ -38,6 +37,8 @@ class CameraLogic(GenericLogic):
     """
     Control a camera.
     """
+    _modclass = 'cameralogic'
+    _modtype = 'logic'
 
     # declare connectors
     hardware = Connector(interface='CameraInterface')

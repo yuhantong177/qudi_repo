@@ -30,8 +30,7 @@ from ctypes import *
 
 import numpy as np
 
-from core.module import Base
-from core.configoption import ConfigOption
+from core.module import Base, ConfigOption
 from interface.camera_interface import CameraInterface
 from .uc480_h import *
 
@@ -48,6 +47,9 @@ class CameraThorlabs(Base, CameraInterface):
         id_camera: 0 # if more tha one camera is present
 
     """
+
+    _modtype = 'camera'
+    _modclass = 'hardware'
 
     _default_exposure = ConfigOption('default_exposure', 0.1)
     _default_gain = ConfigOption('default_gain', 1.0)

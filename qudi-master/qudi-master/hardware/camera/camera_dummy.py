@@ -22,8 +22,7 @@ top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi
 
 import numpy as np
 import time
-from core.module import Base
-from core.configoption import ConfigOption
+from core.module import Base, ConfigOption
 from interface.camera_interface import CameraInterface
 
 
@@ -40,6 +39,9 @@ class CameraDummy(Base, CameraInterface):
         exposure: 0.1
         gain: 1.0
     """
+
+    _modtype = 'DummyCamera'
+    _modclass = 'hardware'
 
     _support_live = ConfigOption('support_live', True)
     _camera_name = ConfigOption('camera_name', 'Dummy camera')

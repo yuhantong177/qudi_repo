@@ -21,8 +21,7 @@ top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi
 """
 
 import visa
-from core.module import Base
-from core.configoption import ConfigOption
+from core.module import Base, ConfigOption
 from interface.microwave_interface import MicrowaveInterface
 from interface.microwave_interface import MicrowaveLimits
 from interface.microwave_interface import MicrowaveMode
@@ -42,6 +41,8 @@ class MicrowaveSynthHDPro(Base, MicrowaveInterface):
         output_channel: 0 # either 0 or 1
 
     """
+    _modclass = 'MicrowaveSynthHDPro'
+    _modtype = 'mwsource'
 
     _serial_port = ConfigOption('serial_port', missing='error')
     _serial_timeout = ConfigOption('serial_timeout', 10, missing='warn')

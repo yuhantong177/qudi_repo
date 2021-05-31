@@ -27,13 +27,11 @@ import time
 import datetime
 import matplotlib.pyplot as plt
 
-from core.connector import Connector
-from core.configoption import ConfigOption
-from core.statusvariable import StatusVar
+from core.module import Connector, ConfigOption, StatusVar
 from core.util.mutex import Mutex
 from core.util.network import netobtain
 from core.util import units
-from core.util.math import compute_ft
+from core.util.helpers import natural_sort
 from logic.generic_logic import GenericLogic
 from logic.pulsed.pulse_extractor import PulseExtractor
 from logic.pulsed.pulse_analyzer import PulseAnalyzer
@@ -43,12 +41,14 @@ class PulsedMeasurementLogic(GenericLogic):
     """
     This is the Logic class for the control of pulsed measurements.
     """
+    _modclass = 'PulsedMeasurementLogic'
+    _modtype = 'logic'
 
-    # declare connectors
+    ## declare connectors
     fitlogic = Connector(interface='FitLogic')
     savelogic = Connector(interface='SaveLogic')
     fastcounter = Connector(interface='FastCounterInterface')
-    microwave = Connector(interface='MicrowaveInterface')
+    microwave = Connector(interface='MWInterface')
     pulsegenerator = Connector(interface='PulserInterface')
 
     # Config options
@@ -66,7 +66,7 @@ class PulsedMeasurementLogic(GenericLogic):
 
     # fast counter settings
     __fast_counter_record_length = StatusVar(default=3.0e-6)
-    __fast_counter_binwidth = StatusVar(default=1.0e-9)
+    __fast_counter_binwidth = StatusVar(default=100.0e-9)
     __fast_counter_gates = StatusVar(default=0)
 
     # measurement timer settings
@@ -1385,7 +1385,7 @@ class PulsedMeasurementLogic(GenericLogic):
                                  label='data trace 2')
 
                 # Do not include fit curve if there is no fit calculated.
-                if self.signal_fit_data.size != 0 and np.sum(np.abs(self.signal_fit_data[1])) > 0:
+                if self.signal_fit_data.size != 0 and np.sum(self.signal_fit_data[1]) > 0:
                     x_axis_fit_scaled = self.signal_fit_data[0] / scaled_float.scale_val
                     ax1.plot(x_axis_fit_scaled, self.signal_fit_data[1],
                              color=colors[2], marker='None', linewidth=1.5,
@@ -1488,8 +1488,7 @@ class PulsedMeasurementLogic(GenericLogic):
                     ax2.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3, ncol=2,
                                mode="expand", borderaxespad=0.)
 
-                    if (self.signal_fit_alt_data.size != 0
-                            and np.sum(np.abs(self.signal_fit_alt_data[1])) > 0):
+                    if self.signal_fit_alt_data.size != 0 and np.sum(self.signal_fit_alt_data[1]) > 0:
                         x_axis_fit_scaled = self.signal_fit_alt_data[0] / scaled_float.scale_val
                         ax2.plot(x_axis_fit_scaled, self.signal_fit_alt_data[1],
                                  color=colors[2], marker='None', linewidth=1.5,
@@ -1581,8 +1580,6 @@ class PulsedMeasurementLogic(GenericLogic):
         parameters['Number of laser pulses'] = self._number_of_lasers
         parameters['alternating'] = self._alternating
         parameters['Controlled variable'] = list(self.signal_data[0])
-        parameters['Approx. measurement time (s)'] = self.__elapsed_time
-        parameters['Measurement sweeps'] = self.__elapsed_sweeps
 
         self.savelogic().save_data(data, timestamp=timestamp,
                                    parameters=parameters, fmt='%d',
@@ -1600,22 +1597,22 @@ class PulsedMeasurementLogic(GenericLogic):
             self.signal_alt_data[0] = self.signal_data[0]
             self.signal_alt_data[1] = self.signal_data[1] - self.signal_data[2]
         elif self._alternative_data_type == 'FFT' and self.signal_data.shape[1] >= 2:
-            fft_x, fft_y = compute_ft(x_val=self.signal_data[0],
-                                      y_val=self.signal_data[1],
-                                      zeropad_num=self.zeropad,
-                                      window=self.window,
-                                      base_corr=self.base_corr,
-                                      psd=self.psd)
+            fft_x, fft_y = units.compute_ft(x_val=self.signal_data[0],
+                                            y_val=self.signal_data[1],
+                                            zeropad_num=self.zeropad,
+                                            window=self.window,
+                                            base_corr=self.base_corr,
+                                            psd=self.psd)
             self.signal_alt_data = np.empty((len(self.signal_data), len(fft_x)), dtype=float)
             self.signal_alt_data[0] = fft_x
             self.signal_alt_data[1] = fft_y
             for dim in range(2, len(self.signal_data)):
-                dummy, self.signal_alt_data[dim] = compute_ft(x_val=self.signal_data[0],
-                                                              y_val=self.signal_data[dim],
-                                                              zeropad_num=self.zeropad,
-                                                              window=self.window,
-                                                              base_corr=self.base_corr,
-                                                              psd=self.psd)
+                dummy, self.signal_alt_data[dim] = units.compute_ft(x_val=self.signal_data[0],
+                                                                    y_val=self.signal_data[dim],
+                                                                    zeropad_num=self.zeropad,
+                                                                    window=self.window,
+                                                                    base_corr=self.base_corr,
+                                                                    psd=self.psd)
         else:
             self.signal_alt_data = np.zeros(self.signal_data.shape, dtype=float)
             self.signal_alt_data[0] = self.signal_data[0]

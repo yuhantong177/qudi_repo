@@ -22,8 +22,7 @@ top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi
 from interface.fast_counter_interface import FastCounterInterface
 import numpy as np
 import TimeTagger as tt
-from core.module import Base
-from core.configoption import ConfigOption
+from core.module import Base, ConfigOption
 import os
 
 
@@ -41,12 +40,14 @@ class TimeTaggerFastCounter(Base, FastCounterInterface):
         timetagger_sum_channels: 4
 
     """
+    _modclass = 'TimeTaggerFastCounter'
+    _modtype = 'hardware'
 
-    _channel_apd_0 = ConfigOption('timetagger_channel_apd_0', missing='error')
-    _channel_apd_1 = ConfigOption('timetagger_channel_apd_1', missing='error')
-    _channel_detect = ConfigOption('timetagger_channel_detect', missing='error')
-    _channel_sequence = ConfigOption('timetagger_channel_sequence', missing='error')
-    _sum_channels = ConfigOption('timetagger_sum_channels', True, missing='warn')
+    #_channel_apd_0 = ConfigOption('timetagger_channel_apd_0', missing='error')
+    #_channel_apd_1 = ConfigOption('timetagger_channel_apd_1', missing='error')
+    #_channel_detect = ConfigOption('timetagger_channel_detect', missing='error')
+    #_channel_sequence = ConfigOption('timetagger_channel_sequence', missing='error')
+    #_sum_channels = ConfigOption('timetagger_sum_channels', True, missing='warn')
 
     def on_activate(self):
         """ Connect and configure the access to the FPGA.
@@ -55,17 +56,17 @@ class TimeTaggerFastCounter(Base, FastCounterInterface):
         self._tagger.reset()
 
         self._number_of_gates = int(100)
-        self._bin_width = 1
+        self._bin_width = 100
         self._record_length = int(4000)
 
-        if self._sum_channels:
-            self._channel_combined = tt.Combiner(self._tagger, channels=[self._channel_apd_0, self._channel_apd_1])
-            self._channel_apd = self._channel_combined.getChannel()
-        else:
-            self._channel_apd = self._channel_apd_0
+        #if self._sum_channels:
+        #    self._channel_combined = tt.Combiner(self._tagger, channels=[self._channel_apd_0, self._channel_apd_1])
+        #    self._channel_apd = self._channel_combined.getChannel()
+        #else:
+        #    self._channel_apd = self._channel_apd_0
 
-        self.log.info('TimeTagger (fast counter) configured to use  channel {0}'
-                      .format(self._channel_apd))
+        #self.log.info('TimeTagger (fast counter) configured to use  channel {0}'
+        #              .format(self._channel_apd))
 
         self.statusvar = 0
 
@@ -107,7 +108,7 @@ class TimeTaggerFastCounter(Base, FastCounterInterface):
 
         # the unit of those entries are seconds per bin. In order to get the
         # current binwidth in seonds use the get_binwidth method.
-        constraints['hardware_binwidth_list'] = [1 / 1000e6]
+        constraints['hardware_binwidth_list'] = [100 / 1000e6]
 
         # TODO: think maybe about a software_binwidth_list, which will
         #      postprocess the obtained counts. These bins must be integer
@@ -139,6 +140,7 @@ class TimeTaggerFastCounter(Base, FastCounterInterface):
                     gate_length_s: the actual set gate length in seconds
                     number_of_gates: the number of gated, which are accepted
         """
+
         self._number_of_gates = number_of_gates
         self._bin_width = bin_width_s * 1e9
         self._record_length = 1 + int(record_length_s / bin_width_s)
@@ -146,9 +148,9 @@ class TimeTaggerFastCounter(Base, FastCounterInterface):
 
         self.pulsed = tt.TimeDifferences(
             tagger=self._tagger,
-            click_channel=self._channel_apd,
-            start_channel=self._channel_detect,
-            next_channel=self._channel_detect,
+            click_channel=1,
+            start_channel=3,
+            next_channel=4,
             sync_channel=tt.CHANNEL_UNUSED,
             binwidth=int(np.round(self._bin_width * 1000)),
             n_bins=int(self._record_length),

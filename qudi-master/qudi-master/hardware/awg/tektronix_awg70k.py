@@ -30,8 +30,7 @@ from collections import OrderedDict
 from ftplib import FTP
 from lxml import etree as ET
 
-from core.module import Base
-from core.configoption import ConfigOption
+from core.module import Base, ConfigOption
 from core.util.modules import get_home_dir
 from core.util.helpers import natural_sort
 from interface.pulser_interface import PulserInterface, PulserConstraints, SequenceOption

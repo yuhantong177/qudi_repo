@@ -21,8 +21,7 @@ Copyright (c) the Qudi Developers. See the COPYRIGHT.txt file at the
 top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi/>
 """
 
-from core.module import Base
-from core.configoption import ConfigOption
+from core.module import Base, ConfigOption
 import visa
 
 class EdwardsVacuumController(Base):
@@ -38,6 +37,10 @@ class EdwardsVacuumController(Base):
         interface: 'ASRL1::INSTR'
 
     """
+
+    _modclass = 'edwards_pump'
+    _modtype = 'hardware'
+
     # config options
     _interface = ConfigOption('interface', missing='error')
 

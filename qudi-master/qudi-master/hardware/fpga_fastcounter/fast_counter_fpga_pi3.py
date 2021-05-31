@@ -23,8 +23,7 @@ import numpy as np
 import os
 import thirdparty.stuttgart_counter.TimeTagger as tt
 
-from core.module import Base
-from core.configoption import ConfigOption
+from core.module import Base, ConfigOption
 from core.util.modules import get_main_dir
 from interface.fast_counter_interface import FastCounterInterface
 
@@ -43,6 +42,9 @@ class FastCounterFGAPiP3(Base, FastCounterInterface):
         fpgacounter_channel_sequence: 6
 
     """
+
+    _modclass = 'FastCounterFGAPiP3'
+    _modtype = 'hardware'
 
     # config options
     _fpgacounter_serial = ConfigOption('fpgacounter_serial', missing='error')

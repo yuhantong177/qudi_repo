@@ -20,14 +20,15 @@ Copyright (c) the Qudi Developers. See the COPYRIGHT.txt file at the
 top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi/>
 """
 
-from core.module import Base
-from core.configoption import ConfigOption
-from core.statusvariable import  StatusVar
-from core.util.modules import get_home_dir
+#from core.module import Base
+#from core.configoption import ConfigOption
+from core.module import Base, ConfigOption, StatusVar
+#from core.statusvariable import StatusVar
+#from core.util.modules import get_home_dir
 from interface.pulser_interface import PulserInterface, PulserConstraints
 from collections import OrderedDict
 import numpy as np
-
+#changed all 'ps' instances to 'pulsestreamer'
 import pulsestreamer as ps
 
 
@@ -46,7 +47,8 @@ class PulseStreamer(Base, PulserInterface):
         external_clock_option: 0
     """
 
-    _pulsestreamer_ip = ConfigOption('pulsestreamer_ip', '192.168.1.100', missing='warn')
+    #_pulsestreamer_ip = ConfigOption('pulsestreamer_ip', '192.168.1.100', missing='warn')
+    _pulsestreamer_ip = ConfigOption('pulsestreamer_ip', '169.254.8.2', missing='warn')
     _laser_channel = ConfigOption('laser_channel', 1, missing='warn')
     _uw_x_channel = ConfigOption('uw_x_channel', 3, missing='warn')
     _use_external_clock = ConfigOption('use_external_clock', False, missing='info')

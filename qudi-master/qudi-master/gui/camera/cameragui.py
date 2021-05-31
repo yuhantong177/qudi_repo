@@ -22,7 +22,7 @@ top-level directory of this distribution and at <https://github.com/Ulm-IQO/qudi
 import os
 import pyqtgraph as pg
 
-from core.connector import Connector
+from core.module import Connector
 from gui.colordefs import QudiPalettePale as Palette
 from gui.guibase import GUIBase
 from gui.colordefs import ColorScaleInferno
@@ -69,6 +69,8 @@ class CameraWindow(QtWidgets.QMainWindow):
 class CameraGUI(GUIBase):
     """ Main spectrometer camera class.
     """
+    _modclass = 'CameraGui'
+    _modtype = 'gui'
 
     camera_logic = Connector(interface='CameraLogic')
     savelogic = Connector(interface='SaveLogic')
