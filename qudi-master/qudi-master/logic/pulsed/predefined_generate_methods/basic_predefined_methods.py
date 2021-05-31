@@ -204,6 +204,61 @@ class BasicPredefinedGenerator(PredefinedGeneratorBase):
         created_ensembles.append(block_ensemble)
         return created_blocks, created_ensembles, created_sequences
 
+        # *************************************************************************************************
+        # *************************************************************************************************
+
+    def generate_full_rabi_mach_three(self, name='full_rabi_mach_three', tau_start=10.0e-9, tau_step=10.0e-9,
+                                      num_of_points=50):
+        created_blocks = list()
+        created_ensembles = list()
+        created_sequences = list()
+        # get tau array for measurement ticks
+        tau_array = tau_start + np.arange(num_of_points) * tau_step
+
+        # create the laser_mw element
+        mw_element = self._get_mw_element(length=tau_start,
+                                          increment=tau_step,
+                                          amp=self.microwave_amplitude,
+                                          freq=self.microwave_frequency,
+                                          phase=0)
+        waiting_element = self._get_idle_element(length=self.wait_time,
+                                                 increment=0)
+        laser_element = self._get_laser_gate_element(length=self.laser_length,
+                                                     increment=0)
+        delay_element = self._get_delay_gate_element()
+
+        # Create block and append to created_blocks list
+        rabi_block = PulseBlock(name=name)
+        rabi_block.append(mw_element)
+        rabi_block.append(laser_element)
+        rabi_block.append(delay_element)
+        rabi_block.append(waiting_element)
+        created_blocks.append(rabi_block)
+
+        # Create block ensemble
+        block_ensemble = PulseBlockEnsemble(name=name, rotating_frame=False)
+        block_ensemble.append((rabi_block.name, num_of_points - 1))
+
+        # Create and append sync trigger block if needed
+        self._add_trigger(created_blocks=created_blocks, block_ensemble=block_ensemble)
+
+        # add metadata to invoke settings later on
+        block_ensemble.measurement_information['alternating'] = False
+        block_ensemble.measurement_information['laser_ignore_list'] = list()
+        block_ensemble.measurement_information['controlled_variable'] = tau_array
+        block_ensemble.measurement_information['units'] = ('s', '')
+        block_ensemble.measurement_information['labels'] = ('Tau', 'Signal')
+        block_ensemble.measurement_information['number_of_lasers'] = num_of_points
+        block_ensemble.measurement_information['counting_length'] = self._get_ensemble_count_length(
+            ensemble=block_ensemble, created_blocks=created_blocks)
+
+        # Append ensemble to created_ensembles list
+        created_ensembles.append(block_ensemble)
+        return created_blocks, created_ensembles, created_sequences
+
+        # *************************************************************************************************
+        # *************************************************************************************************
+
     def generate_pulsedodmr(self, name='pulsedODMR', freq_start=2870.0e6, freq_step=0.2e6,
                             num_of_points=50):
         """
