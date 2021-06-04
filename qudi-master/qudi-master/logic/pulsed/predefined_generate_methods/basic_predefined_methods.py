@@ -204,40 +204,90 @@ class BasicPredefinedGenerator(PredefinedGeneratorBase):
         created_ensembles.append(block_ensemble)
         return created_blocks, created_ensembles, created_sequences
 
-        # *************************************************************************************************
-        # *************************************************************************************************
-
-    def generate_full_rabi_mach_three(self, name='full_rabi_mach_three', tau_start=10.0e-9, tau_step=10.0e-9,
-                                      num_of_points=50):
+    # *************************************************************************************************
+    # *************************************************************************************************
+    # June 4, 2021. Sequence of rabi pulsing made by editing Rabi pulsing, edited by Andrew
+    def generate_full_rabi_mach_three(self, name='full_rabi_mach_three', ini_short=10e-9, ini_long=3e-6,
+                                      ini_mic_delay1=1e-6,
+                                      ini_mic_delay_start=0.3e-6, ini_mic_delay_step=-10e-9, microwave_start=10e-9,
+                                      microwave_step=10e-9, mic_read_delay=700e-9, readout=300e-9,
+                                      read_nextcycle_delay=1e-6, num_of_cycles=25, laser_channel='d_ch1',
+                                      mw_channel='d_ch2', time_tagger_channel='d_ch3'):
         created_blocks = list()
         created_ensembles = list()
         created_sequences = list()
-        # get tau array for measurement ticks
-        tau_array = tau_start + np.arange(num_of_points) * tau_step
-
-        # create the laser_mw element
-        mw_element = self._get_mw_element(length=tau_start,
-                                          increment=tau_step,
-                                          amp=self.microwave_amplitude,
-                                          freq=self.microwave_frequency,
-                                          phase=0)
-        waiting_element = self._get_idle_element(length=self.wait_time,
-                                                 increment=0)
-        laser_element = self._get_laser_gate_element(length=self.laser_length,
-                                                     increment=0)
-        delay_element = self._get_delay_gate_element()
+        # get ini_mic_delay and microwave array for measurement ticks
+        # tau_array = tau_start + np.arange(num_of_cycles) * tau_step
+        ini_mic_delay_array = ini_mic_delay_start + np.arange(num_of_cycles) * ini_mic_delay_step
+        microwave_array = microwave_start + np.arange(num_of_cycles) * microwave_step
+        i_array = np.arange(num_of_cycles-1)
 
         # Create block and append to created_blocks list
         rabi_block = PulseBlock(name=name)
-        rabi_block.append(mw_element)
-        rabi_block.append(laser_element)
-        rabi_block.append(delay_element)
-        rabi_block.append(waiting_element)
+
+        # first two rows
+        readout_element = self._get_trigger_element(length=readout, increment=0, channels=laser_channel)
+        rabi_block.append(readout_element)
+
+        read_nextcycle_delay_element = self._get_idle_element(length=read_nextcycle_delay, increment=0)
+        rabi_block.append(read_nextcycle_delay_element)
+
+        # TODO: CHOOSE TO START TIME TAGGER BEFORE OR CHOOSE TO ADD IT IN PULSE BLOCK MANUALLY
+        # start_time_tagger_element = self._get_trigger_element(length=1e-9, increment=0, channels=time_tagger_channel)
+        # rabi_block.append(start_time_tagger_element)
+
+        # cycle starts
+        for i in i_array:
+            ini_short_element = self._get_trigger_element(length=ini_short, increment=0, channels=laser_channel)
+            rabi_block.append(ini_short_element)
+            ini_long_element = self._get_trigger_element(length=ini_long, increment=0, channels=laser_channel)
+            rabi_block.append(ini_long_element) # initialization
+
+            ini_mic_delay_element1 = self._get_idle_element(length=ini_mic_delay1, increment=0)
+            rabi_block.append(ini_mic_delay_element1)
+            ini_mic_delay_element = self._get_idle_element(length=ini_mic_delay_array[i], increment=0)
+            rabi_block.append(ini_mic_delay_element) # initialization_microwave delay
+
+            mw_element = self._get_trigger_element(length=microwave_array[i], increment=0, channels=mw_channel)
+            rabi_block.append(mw_element) # microwave
+
+            mic_read_delay_element = self._get_idle_element(length=mic_read_delay, increment=0)
+            rabi_block.append(mic_read_delay_element) # microwave_readout delay
+
+            readout_element = self._get_trigger_element(length=readout, increment=0, channels=laser_channel)
+            rabi_block.append(readout_element) # readout
+
+            read_nextcycle_delay_element = self._get_idle_element(length=read_nextcycle_delay, increment=0)
+            rabi_block.append(read_nextcycle_delay_element) # readout_next-cycle delay
+
+        # last cycle
+        ini_short_element = self._get_trigger_element(length=ini_short, increment=0, channels=laser_channel)
+        rabi_block.append(ini_short_element)
+        ini_long_element = self._get_trigger_element(length=ini_long, increment=0, channels=laser_channel)
+        rabi_block.append(ini_long_element)  # initialization
+
+        ini_mic_delay_element1 = self._get_idle_element(length=ini_mic_delay1, increment=0)
+        rabi_block.append(ini_mic_delay_element1)
+        ini_mic_delay_element = self._get_idle_element(length=ini_mic_delay_array[i], increment=0)
+        rabi_block.append(ini_mic_delay_element)  # initialization_microwave delay
+
+        mw_element = self._get_trigger_element(length=microwave_array[i], increment=0, channels=mw_channel)
+        rabi_block.append(mw_element)  # microwave
+
+        mic_read_delay_element = self._get_idle_element(length=mic_read_delay, increment=0)
+        rabi_block.append(mic_read_delay_element)  # microwave_readout delay
+
+        # laser_element = self._get_laser_gate_element(length=self.laser_length,
+        #                                             increment=0)
+        # delay_element = self._get_delay_gate_element()
+        # rabi_block.append(laser_element)
+        # rabi_block.append(delay_element)
+
         created_blocks.append(rabi_block)
 
         # Create block ensemble
         block_ensemble = PulseBlockEnsemble(name=name, rotating_frame=False)
-        block_ensemble.append((rabi_block.name, num_of_points - 1))
+        block_ensemble.append((rabi_block.name, num_of_cycles - 1))
 
         # Create and append sync trigger block if needed
         self._add_trigger(created_blocks=created_blocks, block_ensemble=block_ensemble)
@@ -245,19 +295,19 @@ class BasicPredefinedGenerator(PredefinedGeneratorBase):
         # add metadata to invoke settings later on
         block_ensemble.measurement_information['alternating'] = False
         block_ensemble.measurement_information['laser_ignore_list'] = list()
-        block_ensemble.measurement_information['controlled_variable'] = tau_array
+        block_ensemble.measurement_information['controlled_variable1'] = ini_mic_delay_array
+        block_ensemble.measurement_information['controlled_variable2'] = microwave_array
         block_ensemble.measurement_information['units'] = ('s', '')
         block_ensemble.measurement_information['labels'] = ('Tau', 'Signal')
-        block_ensemble.measurement_information['number_of_lasers'] = num_of_points
+        block_ensemble.measurement_information['number_of_lasers'] = num_of_cycles
         block_ensemble.measurement_information['counting_length'] = self._get_ensemble_count_length(
             ensemble=block_ensemble, created_blocks=created_blocks)
 
         # Append ensemble to created_ensembles list
         created_ensembles.append(block_ensemble)
         return created_blocks, created_ensembles, created_sequences
-
-        # *************************************************************************************************
-        # *************************************************************************************************
+    # *************************************************************************************************
+    # *************************************************************************************************
 
     def generate_pulsedodmr(self, name='pulsedODMR', freq_start=2870.0e6, freq_step=0.2e6,
                             num_of_points=50):
