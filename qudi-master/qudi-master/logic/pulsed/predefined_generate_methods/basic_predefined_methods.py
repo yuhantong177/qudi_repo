@@ -238,7 +238,11 @@ class BasicPredefinedGenerator(PredefinedGeneratorBase):
 
         # cycle starts
         for i in i_array:
-            ini_short_element = self._get_trigger_element(length=ini_short, increment=0, channels=laser_channel)
+            if i == 0:
+                ini_short_element = self._get_trigger_element(length=ini_short, increment=0,
+                                                              channels=[laser_channel, time_tagger_channel])
+            else:
+                ini_short_element = self._get_trigger_element(length=ini_short, increment=0, channels=laser_channel)
             rabi_block.append(ini_short_element)
             ini_long_element = self._get_trigger_element(length=ini_long, increment=0, channels=laser_channel)
             rabi_block.append(ini_long_element) # initialization
@@ -304,6 +308,124 @@ class BasicPredefinedGenerator(PredefinedGeneratorBase):
             ensemble=block_ensemble, created_blocks=created_blocks)
 
         # Append ensemble to created_ensembles list
+        created_ensembles.append(block_ensemble)
+        return created_blocks, created_ensembles, created_sequences
+    # *************************************************************************************************
+    # *************************************************************************************************
+
+    # *************************************************************************************************
+    # *************************************************************************************************
+    # June 4, 2021. Sequence of t1 pulsing made by editing t1 pulsing method, edited by Andrew
+    def generate_t1_prototype_one(self, name='T1_prototype_one', ini_short=10e-9, ini_long=3e-6, ini_micro_delay=1e-6,
+                                  microwave=75e-9, mic_read_delay_start=1e-3, mic_read_delay_step=5e-3,
+                                  mic_read_delay_first_step=4e-3, readout=300e-9,
+                                  read_next_delay_start=29e-3, read_next_delay_first_step=-4e-3,
+                                  read_next_delay_step=-5e-3,
+                                  num_of_cycles=4, laser_channel='d_ch1', mw_channel='d_ch2',
+                                  time_tagger_channel='d_ch3', alternating=False):
+        """
+
+        """
+        created_blocks = list()
+        created_ensembles = list()
+        created_sequences = list()
+
+        # get tau array for measurement ticks
+        mic_read_delay_array = mic_read_delay_start + np.arange(num_of_cycles) * mic_read_delay_step
+        read_next_delay_array = read_next_delay_start + np.arange(num_of_cycles) * read_next_delay_step
+        i_array = np.arange(num_of_cycles - 1)
+
+        # create the elements
+
+        t1_block = PulseBlock(name=name)
+
+        # first two rows
+        readout_element = self._get_trigger_element(length=readout, increment=0, channels=laser_channel)
+        t1_block.append(readout_element)
+
+        read_next_delay_element = self._get_idle_element(length=read_next_delay_array[num_of_cycles - 1] -
+                                                                (read_next_delay_step - read_next_delay_first_step),
+                                                         increment=0)
+        t1_block.append(read_next_delay_element)
+
+        # cycle starts
+        for i in i_array:
+            if i == 0:
+                ini_short_element = self._get_trigger_element(length=ini_short, increment=0,
+                                                              channels=[laser_channel, time_tagger_channel])
+            else:
+                ini_short_element = self._get_trigger_element(length=ini_short, increment=0, channels=laser_channel)
+            t1_block.append(ini_short_element)
+            ini_long_element = self._get_trigger_element(length=ini_long, increment=0, channels=laser_channel)
+            t1_block.append(ini_long_element)
+
+            ini_micro_delay_element = self._get_idle_element(length=ini_micro_delay, increment=0)
+            t1_block.append(ini_micro_delay_element)
+
+            microwave_element = self._get_trigger_element(length=microwave, increment=0, channels=mw_channel)
+            t1_block.append(microwave_element)
+
+            if i == 0:
+                mic_read_delay_element = self._get_idle_element(length=mic_read_delay_array[i], increment=0)
+            else:
+                mic_read_delay_element = self._get_idle_element(length=mic_read_delay_array[i] -
+                                                                (mic_read_delay_step - mic_read_delay_first_step),
+                                                                increment=0)
+            t1_block.append(mic_read_delay_element)
+
+            if i == 0:
+                readout_element = self._get_idle_element(length=readout, increment=0)
+            else:
+                readout_element = self._get_trigger_element(length=readout, increment=0, channels=laser_channel)
+            t1_block.append(readout_element)
+
+            if i == 0:
+                read_next_delay_element = \
+                    self._get_idle_element(length=read_next_delay_array[i], increment=0)
+            else:
+                read_next_delay_element = self._get_idle_element(length=read_next_delay_array[i] -
+                                                                (read_next_delay_step - read_next_delay_first_step),
+                                                                 increment=0)
+            t1_block.append(read_next_delay_element)
+
+        # last 5 rows
+        ini_short_element = self._get_trigger_element(length=ini_short, increment=0, channels=laser_channel)
+        t1_block.append(ini_short_element)
+        ini_long_element = self._get_trigger_element(length=ini_long, increment=0, channels=laser_channel)
+        t1_block.append(ini_long_element)
+
+        ini_micro_delay_element = self._get_idle_element(length=ini_micro_delay, increment=0)
+        t1_block.append(ini_micro_delay_element)
+
+        microwave_element = self._get_trigger_element(length=microwave, increment=0, channels=mw_channel)
+        t1_block.append(microwave_element)
+
+        mic_read_delay_element = \
+            self._get_idle_element(length=mic_read_delay_array[num_of_cycles - 1] -
+                                          (mic_read_delay_step - mic_read_delay_first_step), increment=0)
+        t1_block.append(mic_read_delay_element)
+
+        created_blocks.append(t1_block)
+
+        # Create block ensemble
+        block_ensemble = PulseBlockEnsemble(name=name, rotating_frame=False)
+        block_ensemble.append((t1_block.name, num_of_cycles - 1))
+
+        # Create and append sync trigger block if needed
+        self._add_trigger(created_blocks=created_blocks, block_ensemble=block_ensemble)
+
+        # add metadata to invoke settings later on
+        number_of_lasers = 2 * num_of_cycles if alternating else num_of_cycles
+        block_ensemble.measurement_information['alternating'] = alternating
+        block_ensemble.measurement_information['laser_ignore_list'] = list()
+        block_ensemble.measurement_information['controlled_variable1'] = mic_read_delay_array
+        block_ensemble.measurement_information['controlled_variable2'] = read_next_delay_array
+        block_ensemble.measurement_information['units'] = ('s', '')
+        block_ensemble.measurement_information['labels'] = ('Tau', 'Signal')
+        block_ensemble.measurement_information['number_of_lasers'] = number_of_lasers
+        block_ensemble.measurement_information['counting_length'] = self._get_ensemble_count_length(
+            ensemble=block_ensemble, created_blocks=created_blocks)
+        # append ensemble to created ensembles
         created_ensembles.append(block_ensemble)
         return created_blocks, created_ensembles, created_sequences
     # *************************************************************************************************
