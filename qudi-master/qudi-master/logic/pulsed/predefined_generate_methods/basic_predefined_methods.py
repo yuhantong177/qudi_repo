@@ -205,14 +205,18 @@ class BasicPredefinedGenerator(PredefinedGeneratorBase):
         return created_blocks, created_ensembles, created_sequences
 
     # *************************************************************************************************
-    # *************************************************************************************************
-    # June 4, 2021. Sequence of rabi pulsing made by editing Rabi pulsing, edited by Andrew
-    def generate_full_rabi_mach_three(self, name='full_rabi_mach_three', ini_short=10e-9, ini_long=3e-6,
-                                      ini_mic_delay1=1e-6,
-                                      ini_mic_delay_start=0.3e-6, ini_mic_delay_step=-10e-9, microwave_start=10e-9,
-                                      microwave_step=10e-9, mic_read_delay=700e-9, readout=300e-9,
-                                      read_nextcycle_delay=1e-6, num_of_cycles=25, laser_channel='d_ch1',
-                                      mw_channel='d_ch2', time_tagger_channel='d_ch3'):
+    # ************************************************************************************************
+    # Dec.5 I changed the read next cycle delay to from 1e-6 to 900e-9.
+    # Added step size decrease of read next cycle in each loop
+    def generate_FRS(self, name='FRS', ini_short=10.0e-9, ini_long=3.0e-6,
+                     ini_mic_delay1=1.0e-6,
+                     microwave_start=10.0e-9,
+                     microwave_step=10.0e-9, mic_read_delay=700.0e-9, readout=300.0e-9,
+                     read_nextcycle_delay=900.0e-9, read_nextcycle_delay_step=10.0e-9, num_of_cycles=25,
+                     laser_channel='d_ch1',
+                     mw_channel='d_ch2', time_tagger_channel='d_ch3'):
+        ini_mic_delay_start = 300.0e-9
+        ini_mic_delay_step = -10.0e-9
         created_blocks = list()
         created_ensembles = list()
         created_sequences = list()
@@ -220,7 +224,7 @@ class BasicPredefinedGenerator(PredefinedGeneratorBase):
         # tau_array = tau_start + np.arange(num_of_cycles) * tau_step
         ini_mic_delay_array = ini_mic_delay_start + np.arange(num_of_cycles) * ini_mic_delay_step
         microwave_array = microwave_start + np.arange(num_of_cycles) * microwave_step
-        i_array = np.arange(num_of_cycles-1)
+        i_array = np.arange(num_of_cycles - 1)
 
         # Create block and append to created_blocks list
         rabi_block = PulseBlock(name=name)
@@ -245,24 +249,26 @@ class BasicPredefinedGenerator(PredefinedGeneratorBase):
                 ini_short_element = self._get_trigger_element(length=ini_short, increment=0, channels=laser_channel)
             rabi_block.append(ini_short_element)
             ini_long_element = self._get_trigger_element(length=ini_long, increment=0, channels=laser_channel)
-            rabi_block.append(ini_long_element) # initialization
+            rabi_block.append(ini_long_element)  # initialization
 
             ini_mic_delay_element1 = self._get_idle_element(length=ini_mic_delay1, increment=0)
             rabi_block.append(ini_mic_delay_element1)
             ini_mic_delay_element = self._get_idle_element(length=ini_mic_delay_array[i], increment=0)
-            rabi_block.append(ini_mic_delay_element) # initialization_microwave delay
+            rabi_block.append(ini_mic_delay_element)  # initialization_microwave delay
 
             mw_element = self._get_trigger_element(length=microwave_array[i], increment=0, channels=mw_channel)
-            rabi_block.append(mw_element) # microwave
+            rabi_block.append(mw_element)  # microwave
 
             mic_read_delay_element = self._get_idle_element(length=mic_read_delay, increment=0)
-            rabi_block.append(mic_read_delay_element) # microwave_readout delay
+            rabi_block.append(mic_read_delay_element)  # microwave_readout delay
 
             readout_element = self._get_trigger_element(length=readout, increment=0, channels=laser_channel)
-            rabi_block.append(readout_element) # readout
+            rabi_block.append(readout_element)  # readout
 
-            read_nextcycle_delay_element = self._get_idle_element(length=read_nextcycle_delay, increment=0)
-            rabi_block.append(read_nextcycle_delay_element) # readout_next-cycle delay
+            read_nextcycle_delay_element = \
+                self._get_idle_element(length=read_nextcycle_delay - (i + 1) * read_nextcycle_delay_step,
+                                       increment=0)
+            rabi_block.append(read_nextcycle_delay_element)  # readout_next-cycle delay
 
         # last cycle
         ini_short_element = self._get_trigger_element(length=ini_short, increment=0, channels=laser_channel)
@@ -310,6 +316,7 @@ class BasicPredefinedGenerator(PredefinedGeneratorBase):
         # Append ensemble to created_ensembles list
         created_ensembles.append(block_ensemble)
         return created_blocks, created_ensembles, created_sequences
+
     # *************************************************************************************************
     # *************************************************************************************************
 
