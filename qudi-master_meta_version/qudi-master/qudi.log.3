@@ -1,0 +1,248 @@
+2021-12-07 13:28:08 info __main__ Loading Qudi...
+2021-12-07 13:28:11 error core.util.helpers No Package "git" installed! It is recommended to have this package installed. Perform e.g.
+
+    pip install gitpython
+
+in the console to install the missing package.
+2021-12-07 13:28:12 warning py.warnings C:\Users\Public\confocal\qudi-master\qudi-master\core\__main__.py:134: DeprecationWarning: zmq.eventloop.ioloop is deprecated in pyzmq 17. pyzmq now works with default tornado and asyncio eventloops.
+  ioloop.install()
+
+2021-12-07 13:28:12 debug core.manager Main thread is <sip.voidptr object at 0x000001B2F5952330>
+2021-12-07 13:28:12 info core.manager load.cfg config file found at C:\Users\Public\confocal\qudi-master\qudi-master\config\load.cfg
+2021-12-07 13:28:12 info core.manager Starting Manager configuration from C:/Users/Public/confocal/qudi-master/qudi-master/config/example/default.cfg
+2021-12-07 13:28:13 info core.manager Manager configuration complete.
+2021-12-07 13:28:13 debug core.threadmanager Creating thread: "rpyc-server".
+2021-12-07 13:28:13 info core.remote Started module server at localhost on port 12345
+2021-12-07 13:28:13 info core.manager Started server rpyc://localhost:12345
+2021-12-07 13:28:13 info core.manager Qudi started.
+2021-12-07 13:28:13 info core.manager Loading module ".gui.manager.managergui"
+2021-12-07 13:28:13 info RemoteModule/12345 server started on [127.0.0.1]:12345
+2021-12-07 13:28:14 info core.manager Configuring ManagerGui as man
+2021-12-07 13:28:14 debug gui.manager.managergui.ManagerGui Activation in thread <sip.voidptr object at 0x000001B2F7B42180>
+2021-12-07 13:28:17 debug gui.manager.managergui.ManagerGui IPy activation in thread <sip.voidptr object at 0x000001B2F7B55480>
+2021-12-07 13:28:18 info gui.manager.managergui.ManagerGui IPython has kernel True
+2021-12-07 13:28:18 info gui.manager.managergui.ManagerGui IPython kernel alive True
+2021-12-07 13:28:18 debug core.manager Activation success: True
+2021-12-07 13:28:18 info core.manager Loading module ".gui.trayicon"
+2021-12-07 13:28:18 info core.manager Configuring TrayIcon as tray
+2021-12-07 13:28:18 debug gui.trayicon.TrayIcon Activation in thread <sip.voidptr object at 0x000001B2F9F53F60>
+2021-12-07 13:28:18 debug core.manager Activation success: True
+2021-12-07 13:28:18 info core.manager Loading module ".logic.taskrunner"
+2021-12-07 13:28:18 info core.manager Configuring TaskRunner as tasklogic
+2021-12-07 13:28:18 debug core.threadmanager Creating thread: "mod-logic-tasklogic".
+2021-12-07 13:28:18 debug logic.taskrunner.TaskRunner Activation in thread <sip.voidptr object at 0x000001B2FA303540>
+2021-12-07 13:28:18 info core.manager Task runner registered.
+2021-12-07 13:28:18 info core.manager Loading module ".hardware.national_instruments_x_series"
+2021-12-07 13:28:19 info core.manager Configuring NationalInstrumentsXSeries as nicard_6363
+2021-12-07 13:28:19 warning hardware.national_instruments_x_series.NationalInstrumentsXSeries No variable >> odmr_trigger_line << configured, using default value None instead.
+2021-12-07 13:28:19 warning hardware.national_instruments_x_series.NationalInstrumentsXSeries No variable >> odmr_switch_line << configured, using default value None instead.
+2021-12-07 13:28:19 debug hardware.national_instruments_x_series.NationalInstrumentsXSeries Activation in thread <sip.voidptr object at 0x000001B2FA303810>
+2021-12-07 13:28:19 debug core.manager Activation success: True
+2021-12-07 13:28:19 info core.manager Loading module ".logic.interfuse.scanner_tilt_interfuse"
+2021-12-07 13:28:19 info core.manager Configuring ScannerTiltInterfuse as scanner_tilt_interfuse
+2021-12-07 13:28:19 info core.manager Connecting logic.scanner_tilt_interfuse.confocalscanner1 to hardware.nicard_6363
+2021-12-07 13:28:19 debug core.threadmanager Creating thread: "mod-logic-scanner_tilt_interfuse".
+2021-12-07 13:28:19 debug logic.interfuse.scanner_tilt_interfuse.ScannerTiltInterfuse Activation in thread <sip.voidptr object at 0x000001B2FCB44570>
+2021-12-07 13:28:19 debug core.manager Activation success: True
+2021-12-07 13:28:19 info core.manager Loading module ".logic.fit_logic"
+2021-12-07 13:28:25 info core.manager Configuring FitLogic as fitlogic
+2021-12-07 13:28:25 info logic.fit_logic.FitLogic Methods were included to FitLogic, but only if naming is right: check the doxygen documentation if you added a new method and it does not show.
+2021-12-07 13:28:25 debug core.threadmanager Creating thread: "mod-logic-fitlogic".
+2021-12-07 13:28:25 debug logic.fit_logic.FitLogic Activation in thread <sip.voidptr object at 0x000001B284665810>
+2021-12-07 13:28:25 debug core.manager Activation success: True
+2021-12-07 13:28:25 info core.manager Loading module ".logic.optimizer_logic"
+2021-12-07 13:28:25 info core.manager Configuring OptimizerLogic as optimizerlogic
+2021-12-07 13:28:25 info core.manager Connecting logic.optimizerlogic.confocalscanner1 to logic.scanner_tilt_interfuse
+2021-12-07 13:28:25 info core.manager Connecting logic.optimizerlogic.fitlogic to logic.fitlogic
+2021-12-07 13:28:25 debug core.threadmanager Creating thread: "mod-logic-optimizerlogic".
+2021-12-07 13:28:25 debug logic.optimizer_logic.OptimizerLogic Activation in thread <sip.voidptr object at 0x000001B28469E3F0>
+2021-12-07 13:28:25 debug core.manager Activation success: True
+2021-12-07 13:28:25 debug core.manager Activation success: True
+2021-12-07 13:28:35 info core.manager Loading module ".logic.save_logic"
+2021-12-07 13:28:35 info core.manager Configuring SaveLogic as savelogic
+2021-12-07 13:28:35 debug core.threadmanager Creating thread: "mod-logic-savelogic".
+2021-12-07 13:28:35 debug logic.save_logic.SaveLogic Activation in thread <sip.voidptr object at 0x000001B284717600>
+2021-12-07 13:28:35 info logic.save_logic.SaveLogic Creating directory for today's data in 
+C:/Data\2021\12\20211207
+2021-12-07 13:28:35 debug core.manager Activation success: True
+2021-12-07 13:28:35 info core.manager Loading module ".logic.confocal_logic"
+2021-12-07 13:28:35 info core.manager Configuring ConfocalLogic as scannerlogic
+2021-12-07 13:28:35 info core.manager Connecting logic.scannerlogic.confocalscanner1 to logic.scanner_tilt_interfuse
+2021-12-07 13:28:35 info core.manager Connecting logic.scannerlogic.savelogic to logic.savelogic
+2021-12-07 13:28:36 debug core.threadmanager Creating thread: "mod-logic-scannerlogic".
+2021-12-07 13:28:36 debug logic.confocal_logic.ConfocalLogic Activation in thread <sip.voidptr object at 0x000001B28578E510>
+2021-12-07 13:28:36 debug core.manager Activation success: True
+2021-12-07 13:28:36 info core.manager Loading module ".gui.confocal.confocalgui"
+2021-12-07 13:28:36 info core.manager Configuring ConfocalGui as confocal
+2021-12-07 13:28:36 info core.manager Connecting gui.confocal.confocallogic1 to logic.scannerlogic
+2021-12-07 13:28:36 info core.manager Connecting gui.confocal.savelogic to logic.savelogic
+2021-12-07 13:28:36 info core.manager Connecting gui.confocal.optimizerlogic1 to logic.optimizerlogic
+2021-12-07 13:28:36 debug gui.confocal.confocalgui.ConfocalGui Activation in thread <sip.voidptr object at 0x000001B2857A8C60>
+2021-12-07 13:28:37 debug core.manager Activation success: True
+2021-12-07 14:13:52 info logic.optimizer_logic.OptimizerLogic Optimised from (1.405e-05,-1.185e-05,-2.280e-06) to local maximum at (1.407e-05,-1.191e-05,-4.523e-06).
+2021-12-07 14:14:00 info core.manager Loading module ".hardware.microwave.mw_source_berkeley835_etapa"
+2021-12-07 14:14:00 info core.manager Configuring MicrowaveBerkeley as mw_source_berkeley835_etapa
+2021-12-07 14:14:00 debug hardware.microwave.mw_source_berkeley835_etapa.MicrowaveBerkeley Activation in thread <sip.voidptr object at 0x000001B28C5461E0>
+2021-12-07 14:14:00 debug core.manager Activation success: True
+2021-12-07 14:14:00 info core.manager Loading module ".logic.odmr_logic"
+2021-12-07 14:14:01 info core.manager Configuring ODMRLogic as odmrlogic
+2021-12-07 14:14:01 info core.manager Connecting logic.odmrlogic.odmrcounter to hardware.nicard_6363
+2021-12-07 14:14:01 info core.manager Connecting logic.odmrlogic.fitlogic to logic.fitlogic
+2021-12-07 14:14:01 info core.manager Connecting logic.odmrlogic.microwave1 to hardware.mw_source_berkeley835_etapa
+2021-12-07 14:14:01 info core.manager Connecting logic.odmrlogic.savelogic to logic.savelogic
+2021-12-07 14:14:01 info core.manager Connecting logic.odmrlogic.taskrunner to logic.tasklogic
+2021-12-07 14:14:01 debug core.threadmanager Creating thread: "mod-logic-odmrlogic".
+2021-12-07 14:14:01 debug logic.odmr_logic.ODMRLogic Activation in thread <sip.voidptr object at 0x000001B28C5A6240>
+2021-12-07 14:14:01 debug core.manager Activation success: True
+2021-12-07 14:14:01 info core.manager Loading module ".gui.odmr.odmrgui"
+2021-12-07 14:14:01 info core.manager Configuring ODMRGui as odmr
+2021-12-07 14:14:01 info core.manager Connecting gui.odmr.odmrlogic1 to logic.odmrlogic
+2021-12-07 14:14:01 info core.manager Connecting gui.odmr.savelogic to logic.savelogic
+2021-12-07 14:14:01 debug gui.odmr.odmrgui.ODMRGui Activation in thread <sip.voidptr object at 0x000001B28C820840>
+2021-12-07 14:14:02 debug core.manager Activation success: True
+2021-12-07 14:14:38 debug logic.odmr_logic.ODMRLogic Estimated number of raw data lines: 236
+2021-12-07 14:15:44 info logic.optimizer_logic.OptimizerLogic Optimised from (1.313e-05,-1.249e-05,-4.523e-06) to local maximum at (1.305e-05,-1.225e-05,-4.976e-06).
+2021-12-07 14:16:09 info logic.optimizer_logic.OptimizerLogic Optimised from (1.315e-05,-1.250e-05,-4.976e-06) to local maximum at (1.307e-05,-1.232e-05,-4.561e-06).
+2021-12-07 14:16:24 info logic.optimizer_logic.OptimizerLogic Optimised from (1.481e-05,-1.315e-05,-4.561e-06) to local maximum at (1.487e-05,-1.299e-05,-4.736e-06).
+2021-12-07 14:16:36 debug logic.odmr_logic.ODMRLogic Estimated number of raw data lines: 243
+2021-12-07 14:17:16 info logic.optimizer_logic.OptimizerLogic Optimised from (1.155e-05,-1.418e-05,-4.736e-06) to local maximum at (1.156e-05,-1.389e-05,-4.943e-06).
+2021-12-07 14:17:34 info logic.optimizer_logic.OptimizerLogic Optimised from (1.247e-05,-1.099e-05,-4.943e-06) to local maximum at (1.248e-05,-1.064e-05,-4.964e-06).
+2021-12-07 14:17:55 info logic.optimizer_logic.OptimizerLogic Optimised from (1.109e-05,-1.217e-05,-4.964e-06) to local maximum at (1.110e-05,-1.182e-05,-4.653e-06).
+2021-12-07 14:18:10 info logic.optimizer_logic.OptimizerLogic Optimised from (1.107e-05,-1.215e-05,-4.653e-06) to local maximum at (1.109e-05,-1.180e-05,-4.912e-06).
+2021-12-07 14:18:25 info logic.optimizer_logic.OptimizerLogic Optimised from (1.411e-05,-1.189e-05,-4.912e-06) to local maximum at (1.407e-05,-1.165e-05,-4.887e-06).
+2021-12-07 14:23:00 info logic.optimizer_logic.OptimizerLogic Optimised from (1.405e-05,-1.171e-05,-4.887e-06) to local maximum at (1.407e-05,-1.180e-05,-4.609e-06).
+2021-12-07 14:23:07 debug logic.odmr_logic.ODMRLogic Estimated number of raw data lines: 243
+2021-12-07 14:23:56 info logic.optimizer_logic.OptimizerLogic Optimised from (1.487e-05,-1.296e-05,-4.609e-06) to local maximum at (1.492e-05,-1.303e-05,-4.586e-06).
+2021-12-07 14:24:05 debug logic.odmr_logic.ODMRLogic Estimated number of raw data lines: 243
+2021-12-07 14:25:28 info logic.optimizer_logic.OptimizerLogic Optimised from (1.157e-05,-1.401e-05,-4.586e-06) to local maximum at (1.148e-05,-1.392e-05,-4.563e-06).
+2021-12-07 14:25:33 debug logic.odmr_logic.ODMRLogic Estimated number of raw data lines: 243
+2021-12-07 14:27:56 info logic.optimizer_logic.OptimizerLogic Optimised from (1.148e-05,-1.392e-05,-4.563e-06) to local maximum at (1.144e-05,-1.386e-05,-4.846e-06).
+2021-12-07 14:28:22 info core.manager Loading module ".hardware.swabian_instruments.pulse_streamer"
+2021-12-07 14:28:23 info core.manager Configuring PulseStreamer as pulse_streamer
+2021-12-07 14:28:23 info hardware.swabian_instruments.pulse_streamer.PulseStreamer No variable >> use_external_clock << configured, using default value False instead.
+2021-12-07 14:28:23 info hardware.swabian_instruments.pulse_streamer.PulseStreamer No variable >> external_clock_option << configured, using default value 0 instead.
+2021-12-07 14:28:23 debug hardware.swabian_instruments.pulse_streamer.PulseStreamer Activation in thread <sip.voidptr object at 0x000001B288D38720>
+2021-12-07 14:28:23 debug core.manager Activation success: True
+2021-12-07 14:28:23 info core.manager Loading module ".hardware.swabian_instruments.timetagger_fast_counter"
+2021-12-07 14:28:24 info core.manager Configuring TimeTaggerFastCounter as fastcounter_timetagger
+2021-12-07 14:28:24 debug hardware.swabian_instruments.timetagger_fast_counter.TimeTaggerFastCounter Activation in thread <sip.voidptr object at 0x000001B288D38870>
+2021-12-07 14:28:27 debug core.manager Activation success: True
+2021-12-07 14:28:27 info core.manager Loading module ".logic.pulsed.pulsed_measurement_logic"
+2021-12-07 14:28:27 info core.manager Configuring PulsedMeasurementLogic as pulsedmeasurementlogic
+2021-12-07 14:28:27 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The following configuration was found.
+2021-12-07 14:28:27 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic module.Class: pulsed.pulsed_measurement_logic.PulsedMeasurementLogic
+2021-12-07 14:28:27 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic raw_data_save_type: text
+2021-12-07 14:28:27 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic connect: OrderedDict([('fastcounter', 'fastcounter_timetagger'), ('pulsegenerator', 'pulse_streamer'), ('fitlogic', 'fitlogic'), ('savelogic', 'savelogic'), ('microwave', 'mw_source_berkeley835_etapa')])
+2021-12-07 14:28:27 info core.manager Connecting logic.pulsedmeasurementlogic.fastcounter to hardware.fastcounter_timetagger
+2021-12-07 14:28:27 info core.manager Connecting logic.pulsedmeasurementlogic.pulsegenerator to hardware.pulse_streamer
+2021-12-07 14:28:27 info core.manager Connecting logic.pulsedmeasurementlogic.fitlogic to logic.fitlogic
+2021-12-07 14:28:27 info core.manager Connecting logic.pulsedmeasurementlogic.savelogic to logic.savelogic
+2021-12-07 14:28:27 info core.manager Connecting logic.pulsedmeasurementlogic.microwave to hardware.mw_source_berkeley835_etapa
+2021-12-07 14:28:28 debug core.threadmanager Creating thread: "mod-logic-pulsedmeasurementlogic".
+2021-12-07 14:28:28 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic Activation in thread <sip.voidptr object at 0x000001B288E50E40>
+2021-12-07 14:28:28 debug core.manager Activation success: True
+2021-12-07 14:28:28 info core.manager Loading module ".logic.pulsed.sequence_generator_logic"
+2021-12-07 14:28:28 info core.manager Configuring SequenceGeneratorLogic as sequencegeneratorlogic
+2021-12-07 14:28:28 warning logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic No variable >> assets_storage_path << configured, using default value C:\Users\vidrio\saved_pulsed_assets instead.
+2021-12-07 14:28:28 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic The following configuration was found.
+2021-12-07 14:28:28 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic module.Class: pulsed.sequence_generator_logic.SequenceGeneratorLogic
+2021-12-07 14:28:28 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic connect: OrderedDict([('pulsegenerator', 'pulse_streamer')])
+2021-12-07 14:28:28 info core.manager Connecting logic.sequencegeneratorlogic.pulsegenerator to hardware.pulse_streamer
+2021-12-07 14:28:28 debug core.threadmanager Creating thread: "mod-logic-sequencegeneratorlogic".
+2021-12-07 14:28:28 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Activation in thread <sip.voidptr object at 0x000001B28ED80030>
+2021-12-07 14:28:30 debug core.manager Activation success: True
+2021-12-07 14:28:30 info core.manager Loading module ".logic.pulsed.pulsed_master_logic"
+2021-12-07 14:28:31 info core.manager Configuring PulsedMasterLogic as pulsedmasterlogic
+2021-12-07 14:28:31 info core.manager Connecting logic.pulsedmasterlogic.pulsedmeasurementlogic to logic.pulsedmeasurementlogic
+2021-12-07 14:28:31 info core.manager Connecting logic.pulsedmasterlogic.sequencegeneratorlogic to logic.sequencegeneratorlogic
+2021-12-07 14:28:31 debug core.threadmanager Creating thread: "mod-logic-pulsedmasterlogic".
+2021-12-07 14:28:31 debug logic.pulsed.pulsed_master_logic.PulsedMasterLogic Activation in thread <sip.voidptr object at 0x000001B291C5B750>
+2021-12-07 14:28:31 debug core.manager Activation success: True
+2021-12-07 14:28:31 info core.manager Loading module ".gui.pulsed.pulsed_maingui"
+2021-12-07 14:28:31 info core.manager Configuring PulsedMeasurementGui as pulsedmeasurement
+2021-12-07 14:28:31 info core.manager Connecting gui.pulsedmeasurement.pulsedmasterlogic to logic.pulsedmasterlogic
+2021-12-07 14:28:31 debug gui.pulsed.pulsed_maingui.PulsedMeasurementGui Activation in thread <sip.voidptr object at 0x000001B291CAF390>
+2021-12-07 14:28:32 debug core.manager Activation success: True
+2021-12-07 14:29:53 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic length: 1004310, mod 0
+2021-12-07 14:29:53 info logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Time needed for sampling and writing PulseBlockEnsemble T1_pulsing_1st_etapa_1ms to device: 0 sec
+2021-12-07 14:29:53 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic length: 1004310, mod 0
+2021-12-07 14:29:54 info logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Time needed for sampling and writing PulseBlockEnsemble T1_pulsing_1st_etapa_1ms to device: 0 sec
+2021-12-07 14:29:54 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The set measurement_information did not contain all the necessary information or was not a dict. Setting empty dict.
+2021-12-07 14:29:54 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The set measurement_information did not contain all the necessary information or was not a dict. Setting empty dict.
+2021-12-07 14:30:22 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic length: 1004310, mod 0
+2021-12-07 14:30:22 info logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Time needed for sampling and writing PulseBlockEnsemble T1_pulsing_1st_etapa_1ms to device: 0 sec
+2021-12-07 14:30:22 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic length: 1004310, mod 0
+2021-12-07 14:30:22 info logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Time needed for sampling and writing PulseBlockEnsemble T1_pulsing_1st_etapa_1ms to device: 0 sec
+2021-12-07 14:30:22 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The set measurement_information did not contain all the necessary information or was not a dict. Setting empty dict.
+2021-12-07 14:30:23 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The set measurement_information did not contain all the necessary information or was not a dict. Setting empty dict.
+2021-12-07 15:09:41 info logic.optimizer_logic.OptimizerLogic Optimised from (1.144e-05,-1.386e-05,-4.846e-06) to local maximum at (1.149e-05,-1.421e-05,-5.161e-06).
+2021-12-07 15:10:09 info logic.optimizer_logic.OptimizerLogic Optimised from (1.157e-05,-1.400e-05,-4.850e-06) to local maximum at (1.152e-05,-1.435e-05,-4.526e-06).
+2021-12-07 15:12:46 info logic.optimizer_logic.OptimizerLogic Optimised from (1.155e-05,-1.442e-05,-4.526e-06) to local maximum at (1.154e-05,-1.440e-05,-4.457e-06).
+2021-12-07 15:16:31 debug logic.save_logic.SaveLogic Time needed to save data: 1.00s
+2021-12-07 15:23:53 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic length: 2004310, mod 0
+2021-12-07 15:23:53 info logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Time needed for sampling and writing PulseBlockEnsemble T1_pulsing_1st_etapa_2ms to device: 0 sec
+2021-12-07 15:23:54 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic length: 2004310, mod 0
+2021-12-07 15:23:54 info logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Time needed for sampling and writing PulseBlockEnsemble T1_pulsing_1st_etapa_2ms to device: 0 sec
+2021-12-07 15:23:54 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The set measurement_information did not contain all the necessary information or was not a dict. Setting empty dict.
+2021-12-07 15:23:54 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The set measurement_information did not contain all the necessary information or was not a dict. Setting empty dict.
+2021-12-07 15:24:21 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The data you are trying to fit does not contain enough data for a fit.
+2021-12-07 15:24:21 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The data you are trying to fit does not contain enough data for a fit.
+2021-12-07 15:57:56 info logic.optimizer_logic.OptimizerLogic Optimised from (1.145e-05,-1.451e-05,-4.457e-06) to local maximum at (1.145e-05,-1.449e-05,-4.334e-06).
+2021-12-07 16:43:30 debug logic.save_logic.SaveLogic Time needed to save data: 1.16s
+2021-12-07 16:44:35 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic length: 5004310, mod 0
+2021-12-07 16:44:35 info logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Time needed for sampling and writing PulseBlockEnsemble T1_pulsing_1st_etapa_5ms to device: 0 sec
+2021-12-07 16:44:36 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic length: 5004310, mod 0
+2021-12-07 16:44:36 info logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Time needed for sampling and writing PulseBlockEnsemble T1_pulsing_1st_etapa_5ms to device: 0 sec
+2021-12-07 16:44:36 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The set measurement_information did not contain all the necessary information or was not a dict. Setting empty dict.
+2021-12-07 16:44:36 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The set measurement_information did not contain all the necessary information or was not a dict. Setting empty dict.
+2021-12-07 16:46:52 info logic.optimizer_logic.OptimizerLogic Optimised from (1.150e-05,-1.456e-05,-4.334e-06) to local maximum at (1.151e-05,-1.455e-05,-4.236e-06).
+2021-12-07 16:48:15 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic length: 5004310, mod 0
+2021-12-07 16:48:15 info logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Time needed for sampling and writing PulseBlockEnsemble T1_pulsing_1st_etapa_5ms to device: 0 sec
+2021-12-07 16:48:16 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic length: 5004310, mod 0
+2021-12-07 16:48:16 info logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Time needed for sampling and writing PulseBlockEnsemble T1_pulsing_1st_etapa_5ms to device: 0 sec
+2021-12-07 16:48:16 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The set measurement_information did not contain all the necessary information or was not a dict. Setting empty dict.
+2021-12-07 16:48:17 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The set measurement_information did not contain all the necessary information or was not a dict. Setting empty dict.
+2021-12-07 16:49:05 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic length: 5004310, mod 0
+2021-12-07 16:49:05 info logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Time needed for sampling and writing PulseBlockEnsemble T1_pulsing_1st_etapa_5ms to device: 0 sec
+2021-12-07 16:49:05 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic length: 5004310, mod 0
+2021-12-07 16:49:05 info logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Time needed for sampling and writing PulseBlockEnsemble T1_pulsing_1st_etapa_5ms to device: 0 sec
+2021-12-07 16:49:06 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The set measurement_information did not contain all the necessary information or was not a dict. Setting empty dict.
+2021-12-07 16:49:06 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The set measurement_information did not contain all the necessary information or was not a dict. Setting empty dict.
+2021-12-07 16:49:19 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The data you are trying to fit does not contain enough data for a fit.
+2021-12-07 16:49:19 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The data you are trying to fit does not contain enough data for a fit.
+2021-12-07 17:36:07 info logic.optimizer_logic.OptimizerLogic Optimised from (1.154e-05,-1.459e-05,-4.236e-06) to local maximum at (1.155e-05,-1.458e-05,-4.500e-06).
+2021-12-07 18:24:33 info logic.optimizer_logic.OptimizerLogic Optimised from (1.153e-05,-1.454e-05,-4.500e-06) to local maximum at (1.153e-05,-1.447e-05,-4.610e-06).
+2021-12-07 19:11:13 debug logic.save_logic.SaveLogic Time needed to save data: 1.01s
+2021-12-07 19:13:13 info logic.optimizer_logic.OptimizerLogic Optimised from (1.153e-05,-1.447e-05,-4.610e-06) to local maximum at (1.148e-05,-1.436e-05,-4.895e-06).
+2021-12-07 19:15:25 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic length: 10004310, mod 0
+2021-12-07 19:15:26 info logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Time needed for sampling and writing PulseBlockEnsemble T1_pulsing_1st_etapa_10ms to device: 0 sec
+2021-12-07 19:15:26 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic length: 10004310, mod 0
+2021-12-07 19:15:27 info logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Time needed for sampling and writing PulseBlockEnsemble T1_pulsing_1st_etapa_10ms to device: 0 sec
+2021-12-07 19:15:27 error logic.pulsed.pulsed_master_logic.PulsedMasterLogic Loading of ensemble not possible while measurement is running.
+PulseBlockEnsemble "T1_pulsing_1st_etapa_10ms" not loaded!
+2021-12-07 19:15:27 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The set measurement_information did not contain all the necessary information or was not a dict. Setting empty dict.
+2021-12-07 19:15:34 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic length: 10004310, mod 0
+2021-12-07 19:15:34 info logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Time needed for sampling and writing PulseBlockEnsemble T1_pulsing_1st_etapa_10ms to device: 0 sec
+2021-12-07 19:15:35 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic length: 10004310, mod 0
+2021-12-07 19:15:35 info logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Time needed for sampling and writing PulseBlockEnsemble T1_pulsing_1st_etapa_10ms to device: 0 sec
+2021-12-07 19:15:35 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The set measurement_information did not contain all the necessary information or was not a dict. Setting empty dict.
+2021-12-07 19:15:36 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The set measurement_information did not contain all the necessary information or was not a dict. Setting empty dict.
+2021-12-07 19:15:49 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic length: 10004310, mod 0
+2021-12-07 19:15:49 info logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Time needed for sampling and writing PulseBlockEnsemble T1_pulsing_1st_etapa_10ms to device: 0 sec
+2021-12-07 19:15:50 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic length: 10004310, mod 0
+2021-12-07 19:15:50 info logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Time needed for sampling and writing PulseBlockEnsemble T1_pulsing_1st_etapa_10ms to device: 0 sec
+2021-12-07 19:15:50 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The set measurement_information did not contain all the necessary information or was not a dict. Setting empty dict.
+2021-12-07 19:15:51 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The set measurement_information did not contain all the necessary information or was not a dict. Setting empty dict.
+2021-12-07 19:16:04 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic length: 10004310, mod 0
+2021-12-07 19:16:04 info logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Time needed for sampling and writing PulseBlockEnsemble T1_pulsing_1st_etapa_10ms to device: 0 sec
+2021-12-07 19:16:05 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic length: 10004310, mod 0
+2021-12-07 19:16:05 info logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Time needed for sampling and writing PulseBlockEnsemble T1_pulsing_1st_etapa_10ms to device: 0 sec
+2021-12-07 19:16:05 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The set measurement_information did not contain all the necessary information or was not a dict. Setting empty dict.
+2021-12-07 19:16:06 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The set measurement_information did not contain all the necessary information or was not a dict. Setting empty dict.
+2021-12-07 19:16:33 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The data you are trying to fit does not contain enough data for a fit.
+2021-12-07 19:16:33 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The data you are trying to fit does not contain enough data for a fit.
+2021-12-07 20:01:08 info logic.optimizer_logic.OptimizerLogic Optimised from (1.148e-05,-1.452e-05,-4.895e-06) to local maximum at (1.144e-05,-1.452e-05,-4.437e-06).
+2021-12-07 20:54:07 info logic.optimizer_logic.OptimizerLogic Optimised from (1.151e-05,-1.449e-05,-4.437e-06) to local maximum at (1.144e-05,-1.450e-05,-4.381e-06).
+2021-12-07 21:45:08 info logic.optimizer_logic.OptimizerLogic Optimised from (1.151e-05,-1.458e-05,-4.381e-06) to local maximum at (1.147e-05,-1.462e-05,-4.234e-06).
+2021-12-07 22:37:27 debug logic.save_logic.SaveLogic Time needed to save data: 0.99s
+2021-12-07 22:38:45 info logic.optimizer_logic.OptimizerLogic Optimised from (1.159e-05,-1.462e-05,-4.234e-06) to local maximum at (1.154e-05,-1.463e-05,-4.383e-06).

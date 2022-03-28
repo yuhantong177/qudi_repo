@@ -1,0 +1,70 @@
+2021-12-08 14:12:31 info __main__ Loading Qudi...
+2021-12-08 14:12:34 error core.util.helpers No Package "git" installed! It is recommended to have this package installed. Perform e.g.
+
+    pip install gitpython
+
+in the console to install the missing package.
+2021-12-08 14:12:35 warning py.warnings C:\Users\Public\confocal\qudi-master\qudi-master\core\__main__.py:134: DeprecationWarning: zmq.eventloop.ioloop is deprecated in pyzmq 17. pyzmq now works with default tornado and asyncio eventloops.
+  ioloop.install()
+
+2021-12-08 14:12:35 debug core.manager Main thread is <sip.voidptr object at 0x000001CA60552330>
+2021-12-08 14:12:35 info core.manager load.cfg config file found at C:\Users\Public\confocal\qudi-master\qudi-master\config\load.cfg
+2021-12-08 14:12:35 info core.manager Starting Manager configuration from C:/Users/Public/confocal/qudi-master/qudi-master/config/example/default.cfg
+2021-12-08 14:12:35 info core.manager Manager configuration complete.
+2021-12-08 14:12:35 debug core.threadmanager Creating thread: "rpyc-server".
+2021-12-08 14:12:35 info core.remote Started module server at localhost on port 12345
+2021-12-08 14:12:35 info core.manager Started server rpyc://localhost:12345
+2021-12-08 14:12:35 info core.manager Qudi started.
+2021-12-08 14:12:35 info core.manager Loading module ".gui.manager.managergui"
+2021-12-08 14:12:35 info RemoteModule/12345 server started on [127.0.0.1]:12345
+2021-12-08 14:12:36 info core.manager Configuring ManagerGui as man
+2021-12-08 14:12:36 debug gui.manager.managergui.ManagerGui Activation in thread <sip.voidptr object at 0x000001CA62732180>
+2021-12-08 14:12:40 debug gui.manager.managergui.ManagerGui IPy activation in thread <sip.voidptr object at 0x000001CA627458D0>
+2021-12-08 14:12:40 info gui.manager.managergui.ManagerGui IPython has kernel True
+2021-12-08 14:12:40 info gui.manager.managergui.ManagerGui IPython kernel alive True
+2021-12-08 14:12:40 debug core.manager Activation success: True
+2021-12-08 14:12:41 info core.manager Loading module ".gui.trayicon"
+2021-12-08 14:12:41 info core.manager Configuring TrayIcon as tray
+2021-12-08 14:12:41 debug gui.trayicon.TrayIcon Activation in thread <sip.voidptr object at 0x000001CA64B43F60>
+2021-12-08 14:12:41 debug core.manager Activation success: True
+2021-12-08 14:12:41 info core.manager Loading module ".logic.taskrunner"
+2021-12-08 14:12:41 info core.manager Configuring TaskRunner as tasklogic
+2021-12-08 14:12:41 debug core.threadmanager Creating thread: "mod-logic-tasklogic".
+2021-12-08 14:12:41 debug logic.taskrunner.TaskRunner Activation in thread <sip.voidptr object at 0x000001CA64EF1540>
+2021-12-08 14:12:41 info core.manager Task runner registered.
+2021-12-08 14:12:41 info core.manager Loading module ".hardware.national_instruments_x_series"
+2021-12-08 14:12:42 info core.manager Configuring NationalInstrumentsXSeries as nicard_6363
+2021-12-08 14:12:42 warning hardware.national_instruments_x_series.NationalInstrumentsXSeries No variable >> odmr_trigger_line << configured, using default value None instead.
+2021-12-08 14:12:42 warning hardware.national_instruments_x_series.NationalInstrumentsXSeries No variable >> odmr_switch_line << configured, using default value None instead.
+2021-12-08 14:12:42 debug hardware.national_instruments_x_series.NationalInstrumentsXSeries Activation in thread <sip.voidptr object at 0x000001CA64EF1810>
+2021-12-08 14:12:42 debug core.manager Activation success: True
+2021-12-08 14:12:42 info core.manager Loading module ".logic.interfuse.scanner_tilt_interfuse"
+2021-12-08 14:12:42 info core.manager Configuring ScannerTiltInterfuse as scanner_tilt_interfuse
+2021-12-08 14:12:42 info core.manager Connecting logic.scanner_tilt_interfuse.confocalscanner1 to hardware.nicard_6363
+2021-12-08 14:12:42 debug core.threadmanager Creating thread: "mod-logic-scanner_tilt_interfuse".
+2021-12-08 14:12:42 debug logic.interfuse.scanner_tilt_interfuse.ScannerTiltInterfuse Activation in thread <sip.voidptr object at 0x000001CA67734570>
+2021-12-08 14:12:42 debug core.manager Activation success: True
+2021-12-08 14:12:42 info core.manager Loading module ".logic.fit_logic"
+2021-12-08 14:12:47 info core.manager Configuring FitLogic as fitlogic
+2021-12-08 14:12:47 info logic.fit_logic.FitLogic Methods were included to FitLogic, but only if naming is right: check the doxygen documentation if you added a new method and it does not show.
+2021-12-08 14:12:47 debug core.threadmanager Creating thread: "mod-logic-fitlogic".
+2021-12-08 14:12:47 debug logic.fit_logic.FitLogic Activation in thread <sip.voidptr object at 0x000001CA6F218810>
+2021-12-08 14:12:47 debug core.manager Activation success: True
+2021-12-08 14:12:47 info core.manager Loading module ".logic.optimizer_logic"
+2021-12-08 14:12:47 info core.manager Configuring OptimizerLogic as optimizerlogic
+2021-12-08 14:12:47 info core.manager Connecting logic.optimizerlogic.confocalscanner1 to logic.scanner_tilt_interfuse
+2021-12-08 14:12:47 info core.manager Connecting logic.optimizerlogic.fitlogic to logic.fitlogic
+2021-12-08 14:12:47 debug core.threadmanager Creating thread: "mod-logic-optimizerlogic".
+2021-12-08 14:12:47 debug logic.optimizer_logic.OptimizerLogic Activation in thread <sip.voidptr object at 0x000001CA6F2603F0>
+2021-12-08 14:12:47 debug core.manager Activation success: True
+2021-12-08 14:12:47 debug core.manager Activation success: True
+2021-12-08 14:12:54 info core.manager Loading module ".logic.save_logic"
+2021-12-08 14:12:54 info core.manager Configuring SaveLogic as savelogic
+2021-12-08 14:12:54 debug core.threadmanager Creating thread: "mod-logic-savelogic".
+2021-12-08 14:12:54 debug logic.save_logic.SaveLogic Activation in thread <sip.voidptr object at 0x000001CA6F2D85A0>
+2021-12-08 14:12:54 info logic.save_logic.SaveLogic Creating directory for today's data in 
+C:/Data\2021\12\20211208
+2021-12-08 14:12:54 debug core.manager Activation success: True
+2021-12-08 14:12:55 info core.manager Loading module ".hardware.microwave.mw_source_berkeley835_etapa"
+2021-12-08 14:12:55 info core.manager Configuring MicrowaveBerkeley as mw_source_berkeley835_etapa
+2021-12-08 14:12:55 debug hardware.microwave.mw_source_berkeley835_etapa.MicrowaveBerkeley Activation in thread <sip.voidptr object at 0x000001CA703DEAE0>

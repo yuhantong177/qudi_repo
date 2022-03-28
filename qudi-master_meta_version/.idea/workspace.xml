@@ -1,0 +1,1016 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6e91737c-c0af-4e3b-adeb-9df1e1befd57" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/qudi-master/config/example/default.cfg">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="850">
+              <caret line="50" column="31" selection-start-line="50" selection-start-column="31" selection-end-line="50" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_berkeley835_etapa.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="40" column="12" selection-start-line="40" selection-start-column="12" selection-end-line="40" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/qudi-master/logic/pulsed/predefined_generate_methods/basic_predefined_methods.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="62" lean-forward="true" selection-start-line="11" selection-start-column="62" selection-end-line="11" selection-end-column="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_berkeleytester.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="23" column="21" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_anritsu_MG369x.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3859">
+              <caret line="234" column="28" selection-start-line="234" selection-start-column="24" selection-end-line="234" selection-end-column="28" />
+              <folding>
+                <element signature="e#980#991#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/qudi-master/logic/odmr_logic.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="7803">
+              <caret line="471" column="75" selection-start-line="471" selection-start-column="67" selection-end-line="471" selection-end-column="75" />
+              <folding>
+                <element signature="e#828#851#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>bin_width_s</find>
+      <find>get_bin</find>
+      <find>_fast_counter_binwidth</find>
+      <find>record_length</find>
+      <find>bin_width</find>
+      <find>binwidth</find>
+      <find>100</find>
+      <find>get_limits</find>
+      <find>get_status</find>
+      <find>self.microwave().</find>
+      <find>set_cw</find>
+      <find>rst</find>
+      <find>mw_source_berkeley</find>
+      <find>':FREQ</find>
+      <find>':FREQ {}</find>
+      <find>set_sweep</find>
+      <find>slow</find>
+      <find>save</find>
+      <find>get_path_for_module</find>
+      <find>get_daily_directory</find>
+      <find>self.data_dir</find>
+      <find>timestamp</find>
+      <find>save_data</find>
+      <find>timetagger_fast</find>
+      <find>june</find>
+      <find>power</find>
+      <find>on_activate</find>
+      <find>microwave</find>
+      <find>mw_start</find>
+      <find>set_list</find>
+    </findStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/../Confocal setup/DAQmx.py" />
+        <option value="$PROJECT_DIR$/qudi-master/logic/counter_logic.py" />
+        <option value="$PROJECT_DIR$/qudi-master/interface/slow_counter_interface.py" />
+        <option value="$PROJECT_DIR$/qudi-master/hardware/slow_counter_dummy.py" />
+        <option value="$PROJECT_DIR$/qudi-master/hardware/swabian_instruments/pulse_streamer.py" />
+        <option value="$PROJECT_DIR$/qudi-master/core/manager.py" />
+        <option value="$PROJECT_DIR$/../pulsestream/venv/testingPulses.py" />
+        <option value="$PROJECT_DIR$/qudi-master/hardware/constantValOutput.py" />
+        <option value="$PROJECT_DIR$/qudi-master/logic/confocal_logic.py" />
+        <option value="$PROJECT_DIR$/qudi-master/logic/optimizer_logic.py" />
+        <option value="$PROJECT_DIR$/qudi-master/gui/confocal/confocalgui.py" />
+        <option value="$PROJECT_DIR$/qudi-master/hardware/microwave/testing.py" />
+        <option value="$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_smbv.py" />
+        <option value="$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_agilent.py" />
+        <option value="$PROJECT_DIR$/qudi-master/logic/odmr_logic.py" />
+        <option value="$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_berkeley835.py" />
+        <option value="$PROJECT_DIR$/qudi-master/hardware/national_instruments_x_series.py" />
+        <option value="$PROJECT_DIR$/qudi-master/hardware/pulsetrain.py" />
+        <option value="$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_berkeley835_etapa_testing.py" />
+        <option value="$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_berkeleytester.py" />
+        <option value="$PROJECT_DIR$/qudi-master/hardware/swabian_instruments/swabian_fast_tester.py" />
+        <option value="$PROJECT_DIR$/qudi-master/hardware/swabian_instruments/timetagger_counting_only.py" />
+        <option value="$PROJECT_DIR$/qudi-master/config/example/default.cfg" />
+        <option value="$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_berkeley835_etapa.py" />
+        <option value="$PROJECT_DIR$/qudi-master/logic/pulsed/predefined_generate_methods/basic_predefined_methods.py" />
+        <option value="$PROJECT_DIR$/qudi-master/logic/pulsed/pulsed_measurement_logic.py" />
+        <option value="$PROJECT_DIR$/qudi-master/hardware/swabian_instruments/timetagger_fast_counter.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="889" />
+    <option name="y" value="158" />
+    <option name="width" value="912" />
+    <option name="height" value="1032" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name=".github" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="artwork" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="documentation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="documentation" type="462c0819:PsiDirectoryNode" />
+              <item name="gui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="documentation" type="462c0819:PsiDirectoryNode" />
+              <item name="hardware" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="gui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="gui" type="462c0819:PsiDirectoryNode" />
+              <item name="odmr" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="hardware" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="hardware" type="462c0819:PsiDirectoryNode" />
+              <item name="awg" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="hardware" type="462c0819:PsiDirectoryNode" />
+              <item name="camera" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="hardware" type="462c0819:PsiDirectoryNode" />
+              <item name="dtg" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="hardware" type="462c0819:PsiDirectoryNode" />
+              <item name="fastcomtec" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="hardware" type="462c0819:PsiDirectoryNode" />
+              <item name="fpga_fastcounter" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="hardware" type="462c0819:PsiDirectoryNode" />
+              <item name="fpga_pulser" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="hardware" type="462c0819:PsiDirectoryNode" />
+              <item name="microwave" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="hardware" type="462c0819:PsiDirectoryNode" />
+              <item name="swabian_instruments" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="logic" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="logic" type="462c0819:PsiDirectoryNode" />
+              <item name="fitmethods" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="logic" type="462c0819:PsiDirectoryNode" />
+              <item name="interfuse" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="logic" type="462c0819:PsiDirectoryNode" />
+              <item name="jupyterkernel" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="logic" type="462c0819:PsiDirectoryNode" />
+              <item name="measurement_simulator" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="logic" type="462c0819:PsiDirectoryNode" />
+              <item name="pulsed" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="logic" type="462c0819:PsiDirectoryNode" />
+              <item name="pulsed" type="462c0819:PsiDirectoryNode" />
+              <item name="predefined_generate_methods" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="logic" type="462c0819:PsiDirectoryNode" />
+              <item name="pulsed" type="462c0819:PsiDirectoryNode" />
+              <item name="pulse_extraction_methods" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qudi-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="qudi-master" type="462c0819:PsiDirectoryNode" />
+              <item name="logic" type="462c0819:PsiDirectoryNode" />
+              <item name="pulsed" type="462c0819:PsiDirectoryNode" />
+              <item name="pulsed_analysis_methods" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/qudi-master" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="qudi-master" is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="qudi-master" />
+      </console-settings>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Public\confocal\qudi-master\qudi-master\hardware\microwave" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.start">
+    <configuration name="Unnamed" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="qudi-master" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="E:\Anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="mw_source_berkeley835_etapa_testing" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="qudi-master" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/qudi-master/hardware/microwave" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_berkeley835_etapa_testing.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="mw_source_berkeleytester" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="qudi-master" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/qudi-master/hardware/microwave" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_berkeleytester.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pulsetrain" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="qudi-master" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/qudi-master/hardware" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/qudi-master/hardware/pulsetrain.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="start" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="qudi-master" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/qudi-master" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/qudi-master/start.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="swabian_fast_tester" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="qudi-master" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/qudi-master/hardware/swabian_instruments" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/qudi-master/hardware/swabian_instruments/swabian_fast_tester.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.Unnamed" />
+      <item itemvalue="Python.mw_source_berkeley835_etapa_testing" />
+      <item itemvalue="Python.mw_source_berkeleytester" />
+      <item itemvalue="Python.pulsetrain" />
+      <item itemvalue="Python.start" />
+      <item itemvalue="Python.swabian_fast_tester" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.start" />
+        <item itemvalue="Python.swabian_fast_tester" />
+        <item itemvalue="Python.mw_source_berkeleytester" />
+        <item itemvalue="Python.mw_source_berkeley835_etapa_testing" />
+        <item itemvalue="Python.pulsetrain" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6e91737c-c0af-4e3b-adeb-9df1e1befd57" name="Default Changelist" comment="" />
+      <created>1565903526332</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1565903526332</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="889" y="158" width="912" height="1032" extended-state="0" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.42105263" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32998884" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4702166" weight="0.34705228" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4990942" weight="0.32936078" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5021075" side_tool="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49789253" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4789252" weight="0.32827735" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1938883" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32998884" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4702166" weight="0.33802816" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4990942" weight="0.32936078" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5021075" side_tool="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49789253" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4789252" weight="0.32827735" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout-to-restore>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/qudi-master/gui/counter/countergui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
+          <folding>
+            <element signature="e#816#834#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_anritsu_mg3691c.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-306" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/swabian_instruments/pulse_streamer_pb2_grpc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-442">
+          <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/logic/optimizer_logic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="184" column="26" selection-start-line="184" selection-start-column="12" selection-end-line="184" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_gigatronics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="61" column="20" lean-forward="true" selection-start-line="61" selection-start-column="20" selection-end-line="61" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_smiq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-357" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_windfreak_synthhdpro.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="378" selection-start-line="378" selection-end-line="378" />
+          <folding>
+            <element signature="e#866#877#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/logic/singleshot_logic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8860" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_smr.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="57" selection-start-line="28" selection-start-column="57" selection-end-line="28" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_dummy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="202" column="33" selection-start-line="202" selection-start-column="33" selection-end-line="202" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/microwave/testing.py" />
+    <entry file="file://$PROJECT_DIR$/qudi-master/logic/counter_logic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="68" column="38" lean-forward="true" selection-start-line="68" selection-start-column="38" selection-end-line="68" selection-end-column="38" />
+          <folding>
+            <element signature="e#823#846#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Anaconda3/Lib/site-packages/pyvisa/ctwrapper/functions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26758">
+          <caret line="1583" selection-start-line="1583" selection-end-line="1583" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Anaconda3/Lib/site-packages/pyvisa/resources/messagebased.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10183">
+          <caret line="612" selection-start-line="612" selection-end-line="612" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Anaconda3/Lib/site-packages/pyvisa/ctwrapper/highlevel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="199" lean-forward="true" selection-start-line="199" selection-end-line="199" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/interface/microwave_interface.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="25" column="21" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_smbv.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="300" column="29" lean-forward="true" selection-start-line="300" selection-start-column="29" selection-end-line="300" selection-end-column="29" />
+          <folding>
+            <element signature="e#1000#1011#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/constantValOutput.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="23" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Anaconda3/Lib/site-packages/PyDAQmx/DAQmxFunctions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="66" selection-start-line="66" selection-end-line="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/gui/odmr/odmrgui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1632">
+          <caret line="109" column="33" selection-start-line="109" selection-start-column="33" selection-end-line="109" selection-end-column="33" />
+          <folding>
+            <element signature="e#832#850#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_anritsu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1139">
+          <caret line="75" column="21" selection-start-line="75" selection-start-column="11" selection-end-line="75" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_agilent.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="77" column="21" selection-start-line="77" selection-start-column="11" selection-end-line="77" selection-end-column="21" />
+          <folding>
+            <element signature="e#1037#1048#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/gui/confocal/confocalgui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="537">
+          <caret line="1539" column="43" selection-start-line="1539" selection-start-column="43" selection-end-line="1539" selection-end-column="43" />
+          <folding>
+            <element signature="e#837#855#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/pulsetrain.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="36" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_srssg.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="30" column="53" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_berkeley835.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="46" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/qtpy/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8">
+          <caret line="181" column="37" lean-forward="true" selection-start-line="181" selection-start-column="37" selection-end-line="181" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/core/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/documentation/gui/confocal.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="153">
+            <caret line="9" selection-start-line="9" selection-end-line="9" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/start.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="10" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/logic/pulsed/pulsed_master_logic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="551">
+          <caret line="60" column="47" selection-start-line="60" selection-start-column="47" selection-end-line="60" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/swabian_instruments/pulse_streamer_pb2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="58" selection-start-column="58" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/logic/confocal_logic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="625" column="38" selection-start-line="625" selection-start-column="38" selection-end-line="625" selection-end-column="38" />
+          <folding>
+            <element signature="e#817#840#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/core/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="58" column="11" selection-start-line="58" selection-start-column="11" selection-end-line="58" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/swabian_instruments/swabian_fast_tester.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="4" column="77" selection-start-line="4" selection-start-column="77" selection-end-line="4" selection-end-column="77" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_berkeley835_etapa_testing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="22" column="62" selection-start-line="22" selection-start-column="62" selection-end-line="22" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/gui/pulsed/pulsed_maingui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="2483" lean-forward="true" selection-start-line="2483" selection-end-line="2483" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/swabian_instruments/timetagger_counting_only.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="841">
+          <caret line="151" selection-start-line="151" selection-end-line="151" />
+          <folding>
+            <element signature="e#838#903#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/core/module.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="841">
+          <caret line="102" column="41" selection-start-line="102" selection-start-column="41" selection-end-line="102" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/logic/fit_logic.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/logic/save_logic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="237" column="99" selection-start-line="237" selection-start-column="99" selection-end-line="237" selection-end-column="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/national_instruments_x_series.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="841">
+          <caret line="201" column="66" selection-start-line="201" selection-start-column="66" selection-end-line="201" selection-end-column="66" />
+          <folding>
+            <element signature="e#833#851#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/logic/pulsed/pulsed_measurement_logic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="841">
+          <caret line="194" column="35" selection-start-line="194" selection-start-column="26" selection-end-line="194" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/swabian_instruments/pulse_streamer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="841">
+          <caret line="232" selection-start-line="232" selection-end-line="232" />
+          <folding>
+            <element signature="e#917#970#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/swabian_instruments/timetagger_fast_counter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="841">
+          <caret line="138" column="72" selection-start-line="138" selection-start-column="72" selection-end-line="138" selection-end-column="72" />
+          <folding>
+            <element signature="e#838#903#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/config/example/default.cfg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="50" column="31" selection-start-line="50" selection-start-column="31" selection-end-line="50" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_berkeley835_etapa.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="40" column="12" selection-start-line="40" selection-start-column="12" selection-end-line="40" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_berkeleytester.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="23" column="21" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/hardware/microwave/mw_source_anritsu_MG369x.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3859">
+          <caret line="234" column="28" selection-start-line="234" selection-start-column="24" selection-end-line="234" selection-end-column="28" />
+          <folding>
+            <element signature="e#980#991#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/logic/odmr_logic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7803">
+          <caret line="471" column="75" selection-start-line="471" selection-start-column="67" selection-end-line="471" selection-end-column="75" />
+          <folding>
+            <element signature="e#828#851#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/qudi-master/logic/pulsed/predefined_generate_methods/basic_predefined_methods.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="62" lean-forward="true" selection-start-line="11" selection-start-column="62" selection-end-line="11" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
