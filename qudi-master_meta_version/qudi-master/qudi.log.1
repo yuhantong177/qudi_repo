@@ -1,0 +1,151 @@
+2021-12-08 14:19:10 info __main__ Loading Qudi...
+2021-12-08 14:19:27 error core.util.helpers No Package "git" installed! It is recommended to have this package installed. Perform e.g.
+
+    pip install gitpython
+
+in the console to install the missing package.
+2021-12-08 14:19:29 warning py.warnings C:\Users\Public\confocal\qudi-master\qudi-master\core\__main__.py:134: DeprecationWarning: zmq.eventloop.ioloop is deprecated in pyzmq 17. pyzmq now works with default tornado and asyncio eventloops.
+  ioloop.install()
+
+2021-12-08 14:19:29 debug core.manager Main thread is <sip.voidptr object at 0x0000024F869E2330>
+2021-12-08 14:19:30 info core.manager load.cfg config file found at C:\Users\Public\confocal\qudi-master\qudi-master\config\load.cfg
+2021-12-08 14:19:30 info core.manager Starting Manager configuration from C:/Users/Public/confocal/qudi-master/qudi-master/config/example/default.cfg
+2021-12-08 14:19:30 info core.manager Manager configuration complete.
+2021-12-08 14:19:30 debug core.threadmanager Creating thread: "rpyc-server".
+2021-12-08 14:19:30 info core.remote Started module server at localhost on port 12345
+2021-12-08 14:19:30 info core.manager Started server rpyc://localhost:12345
+2021-12-08 14:19:30 info core.manager Qudi started.
+2021-12-08 14:19:30 info core.manager Loading module ".gui.manager.managergui"
+2021-12-08 14:19:30 info RemoteModule/12345 server started on [127.0.0.1]:12345
+2021-12-08 14:19:32 info core.manager Configuring ManagerGui as man
+2021-12-08 14:19:32 debug gui.manager.managergui.ManagerGui Activation in thread <sip.voidptr object at 0x0000024F88D22180>
+2021-12-08 14:19:37 debug gui.manager.managergui.ManagerGui IPy activation in thread <sip.voidptr object at 0x0000024F88D35360>
+2021-12-08 14:19:38 info gui.manager.managergui.ManagerGui IPython has kernel True
+2021-12-08 14:19:38 info gui.manager.managergui.ManagerGui IPython kernel alive True
+2021-12-08 14:19:38 debug core.manager Activation success: True
+2021-12-08 14:19:39 info core.manager Loading module ".gui.trayicon"
+2021-12-08 14:19:39 info core.manager Configuring TrayIcon as tray
+2021-12-08 14:19:39 debug gui.trayicon.TrayIcon Activation in thread <sip.voidptr object at 0x0000024F8B133F60>
+2021-12-08 14:19:39 debug core.manager Activation success: True
+2021-12-08 14:19:39 info core.manager Loading module ".logic.taskrunner"
+2021-12-08 14:19:39 info core.manager Configuring TaskRunner as tasklogic
+2021-12-08 14:19:39 debug core.threadmanager Creating thread: "mod-logic-tasklogic".
+2021-12-08 14:19:39 debug logic.taskrunner.TaskRunner Activation in thread <sip.voidptr object at 0x0000024F8B4E2540>
+2021-12-08 14:19:39 info core.manager Task runner registered.
+2021-12-08 14:19:39 info core.manager Loading module ".hardware.national_instruments_x_series"
+2021-12-08 14:19:40 info core.manager Configuring NationalInstrumentsXSeries as nicard_6363
+2021-12-08 14:19:40 warning hardware.national_instruments_x_series.NationalInstrumentsXSeries No variable >> odmr_trigger_line << configured, using default value None instead.
+2021-12-08 14:19:40 warning hardware.national_instruments_x_series.NationalInstrumentsXSeries No variable >> odmr_switch_line << configured, using default value None instead.
+2021-12-08 14:19:40 debug hardware.national_instruments_x_series.NationalInstrumentsXSeries Activation in thread <sip.voidptr object at 0x0000024F8B4E2810>
+2021-12-08 14:19:40 debug core.manager Activation success: True
+2021-12-08 14:19:40 info core.manager Loading module ".logic.interfuse.scanner_tilt_interfuse"
+2021-12-08 14:19:40 info core.manager Configuring ScannerTiltInterfuse as scanner_tilt_interfuse
+2021-12-08 14:19:40 info core.manager Connecting logic.scanner_tilt_interfuse.confocalscanner1 to hardware.nicard_6363
+2021-12-08 14:19:40 debug core.threadmanager Creating thread: "mod-logic-scanner_tilt_interfuse".
+2021-12-08 14:19:40 debug logic.interfuse.scanner_tilt_interfuse.ScannerTiltInterfuse Activation in thread <sip.voidptr object at 0x0000024F8DD24570>
+2021-12-08 14:19:40 debug core.manager Activation success: True
+2021-12-08 14:19:40 info core.manager Loading module ".logic.fit_logic"
+2021-12-08 14:19:46 info core.manager Configuring FitLogic as fitlogic
+2021-12-08 14:19:47 info logic.fit_logic.FitLogic Methods were included to FitLogic, but only if naming is right: check the doxygen documentation if you added a new method and it does not show.
+2021-12-08 14:19:47 debug core.threadmanager Creating thread: "mod-logic-fitlogic".
+2021-12-08 14:19:47 debug logic.fit_logic.FitLogic Activation in thread <sip.voidptr object at 0x0000024F95807810>
+2021-12-08 14:19:47 debug core.manager Activation success: True
+2021-12-08 14:19:47 info core.manager Loading module ".logic.optimizer_logic"
+2021-12-08 14:19:47 info core.manager Configuring OptimizerLogic as optimizerlogic
+2021-12-08 14:19:47 info core.manager Connecting logic.optimizerlogic.confocalscanner1 to logic.scanner_tilt_interfuse
+2021-12-08 14:19:47 info core.manager Connecting logic.optimizerlogic.fitlogic to logic.fitlogic
+2021-12-08 14:19:47 debug core.threadmanager Creating thread: "mod-logic-optimizerlogic".
+2021-12-08 14:19:47 debug logic.optimizer_logic.OptimizerLogic Activation in thread <sip.voidptr object at 0x0000024F958503F0>
+2021-12-08 14:19:47 debug core.manager Activation success: True
+2021-12-08 14:19:47 debug core.manager Activation success: True
+2021-12-08 14:20:18 info core.manager Loading module ".hardware.microwave.mw_source_berkeley835_etapa"
+2021-12-08 14:20:18 info core.manager Configuring MicrowaveBerkeley as mw_source_berkeley835_etapa
+2021-12-08 14:20:18 debug hardware.microwave.mw_source_berkeley835_etapa.MicrowaveBerkeley Activation in thread <sip.voidptr object at 0x0000024F96939C00>
+2021-12-08 14:20:19 debug core.manager Activation success: True
+2021-12-08 14:20:19 info core.manager Loading module ".logic.save_logic"
+2021-12-08 14:20:19 info core.manager Configuring SaveLogic as savelogic
+2021-12-08 14:20:19 debug core.threadmanager Creating thread: "mod-logic-savelogic".
+2021-12-08 14:20:19 debug logic.save_logic.SaveLogic Activation in thread <sip.voidptr object at 0x0000024F96C3EB70>
+2021-12-08 14:20:19 info logic.save_logic.SaveLogic Creating directory for today's data in 
+C:/Data\2021\12\20211208
+2021-12-08 14:20:19 debug core.manager Activation success: True
+2021-12-08 14:20:19 info core.manager Loading module ".logic.odmr_logic"
+2021-12-08 14:20:19 info core.manager Configuring ODMRLogic as odmrlogic
+2021-12-08 14:20:19 info core.manager Connecting logic.odmrlogic.odmrcounter to hardware.nicard_6363
+2021-12-08 14:20:19 info core.manager Connecting logic.odmrlogic.fitlogic to logic.fitlogic
+2021-12-08 14:20:19 info core.manager Connecting logic.odmrlogic.microwave1 to hardware.mw_source_berkeley835_etapa
+2021-12-08 14:20:19 info core.manager Connecting logic.odmrlogic.savelogic to logic.savelogic
+2021-12-08 14:20:19 info core.manager Connecting logic.odmrlogic.taskrunner to logic.tasklogic
+2021-12-08 14:20:19 debug core.threadmanager Creating thread: "mod-logic-odmrlogic".
+2021-12-08 14:20:19 debug logic.odmr_logic.ODMRLogic Activation in thread <sip.voidptr object at 0x0000024F96C786C0>
+2021-12-08 14:20:19 debug core.manager Activation success: True
+2021-12-08 14:20:19 info core.manager Loading module ".gui.odmr.odmrgui"
+2021-12-08 14:20:20 info core.manager Configuring ODMRGui as odmr
+2021-12-08 14:20:20 info core.manager Connecting gui.odmr.odmrlogic1 to logic.odmrlogic
+2021-12-08 14:20:20 info core.manager Connecting gui.odmr.savelogic to logic.savelogic
+2021-12-08 14:20:20 debug gui.odmr.odmrgui.ODMRGui Activation in thread <sip.voidptr object at 0x0000024F96CDCB40>
+2021-12-08 14:20:21 debug core.manager Activation success: True
+2021-12-08 14:20:55 debug logic.odmr_logic.ODMRLogic Estimated number of raw data lines: 236
+2021-12-08 14:22:10 debug logic.odmr_logic.ODMRLogic Estimated number of raw data lines: 243
+2021-12-08 14:23:06 info core.manager Loading module ".hardware.swabian_instruments.timetagger_fast_counter"
+2021-12-08 14:23:07 info core.manager Configuring TimeTaggerFastCounter as fastcounter_timetagger
+2021-12-08 14:23:07 debug hardware.swabian_instruments.timetagger_fast_counter.TimeTaggerFastCounter Activation in thread <sip.voidptr object at 0x0000024F88852A20>
+2021-12-08 14:23:10 debug core.manager Activation success: True
+2021-12-08 14:23:10 info core.manager Loading module ".hardware.swabian_instruments.pulse_streamer"
+2021-12-08 14:23:10 info core.manager Configuring PulseStreamer as pulse_streamer
+2021-12-08 14:23:10 info hardware.swabian_instruments.pulse_streamer.PulseStreamer No variable >> use_external_clock << configured, using default value False instead.
+2021-12-08 14:23:10 info hardware.swabian_instruments.pulse_streamer.PulseStreamer No variable >> external_clock_option << configured, using default value 0 instead.
+2021-12-08 14:23:10 debug hardware.swabian_instruments.pulse_streamer.PulseStreamer Activation in thread <sip.voidptr object at 0x0000024F888380C0>
+2021-12-08 14:23:10 debug core.manager Activation success: True
+2021-12-08 14:23:11 info core.manager Loading module ".logic.pulsed.pulsed_measurement_logic"
+2021-12-08 14:23:11 info core.manager Configuring PulsedMeasurementLogic as pulsedmeasurementlogic
+2021-12-08 14:23:11 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The following configuration was found.
+2021-12-08 14:23:11 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic module.Class: pulsed.pulsed_measurement_logic.PulsedMeasurementLogic
+2021-12-08 14:23:11 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic raw_data_save_type: text
+2021-12-08 14:23:11 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic connect: OrderedDict([('fastcounter', 'fastcounter_timetagger'), ('pulsegenerator', 'pulse_streamer'), ('fitlogic', 'fitlogic'), ('savelogic', 'savelogic'), ('microwave', 'mw_source_berkeley835_etapa')])
+2021-12-08 14:23:11 info core.manager Connecting logic.pulsedmeasurementlogic.fastcounter to hardware.fastcounter_timetagger
+2021-12-08 14:23:11 info core.manager Connecting logic.pulsedmeasurementlogic.pulsegenerator to hardware.pulse_streamer
+2021-12-08 14:23:11 info core.manager Connecting logic.pulsedmeasurementlogic.fitlogic to logic.fitlogic
+2021-12-08 14:23:11 info core.manager Connecting logic.pulsedmeasurementlogic.savelogic to logic.savelogic
+2021-12-08 14:23:11 info core.manager Connecting logic.pulsedmeasurementlogic.microwave to hardware.mw_source_berkeley835_etapa
+2021-12-08 14:23:11 debug core.threadmanager Creating thread: "mod-logic-pulsedmeasurementlogic".
+2021-12-08 14:23:11 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic Activation in thread <sip.voidptr object at 0x0000024F88F112A0>
+2021-12-08 14:23:11 debug core.manager Activation success: True
+2021-12-08 14:23:11 info core.manager Loading module ".logic.pulsed.sequence_generator_logic"
+2021-12-08 14:23:11 info core.manager Configuring SequenceGeneratorLogic as sequencegeneratorlogic
+2021-12-08 14:23:11 warning logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic No variable >> assets_storage_path << configured, using default value C:\Users\vidrio\saved_pulsed_assets instead.
+2021-12-08 14:23:11 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic The following configuration was found.
+2021-12-08 14:23:11 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic module.Class: pulsed.sequence_generator_logic.SequenceGeneratorLogic
+2021-12-08 14:23:11 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic connect: OrderedDict([('pulsegenerator', 'pulse_streamer')])
+2021-12-08 14:23:11 info core.manager Connecting logic.sequencegeneratorlogic.pulsegenerator to hardware.pulse_streamer
+2021-12-08 14:23:11 debug core.threadmanager Creating thread: "mod-logic-sequencegeneratorlogic".
+2021-12-08 14:23:11 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Activation in thread <sip.voidptr object at 0x0000024F89100BA0>
+2021-12-08 14:23:14 debug core.manager Activation success: True
+2021-12-08 14:23:14 info core.manager Loading module ".logic.pulsed.pulsed_master_logic"
+2021-12-08 14:23:14 info core.manager Configuring PulsedMasterLogic as pulsedmasterlogic
+2021-12-08 14:23:14 info core.manager Connecting logic.pulsedmasterlogic.pulsedmeasurementlogic to logic.pulsedmeasurementlogic
+2021-12-08 14:23:14 info core.manager Connecting logic.pulsedmasterlogic.sequencegeneratorlogic to logic.sequencegeneratorlogic
+2021-12-08 14:23:14 debug core.threadmanager Creating thread: "mod-logic-pulsedmasterlogic".
+2021-12-08 14:23:14 debug logic.pulsed.pulsed_master_logic.PulsedMasterLogic Activation in thread <sip.voidptr object at 0x0000024F89504C00>
+2021-12-08 14:23:14 debug core.manager Activation success: True
+2021-12-08 14:23:14 info core.manager Loading module ".gui.pulsed.pulsed_maingui"
+2021-12-08 14:23:14 info core.manager Configuring PulsedMeasurementGui as pulsedmeasurement
+2021-12-08 14:23:14 info core.manager Connecting gui.pulsedmeasurement.pulsedmasterlogic to logic.pulsedmasterlogic
+2021-12-08 14:23:14 debug gui.pulsed.pulsed_maingui.PulsedMeasurementGui Activation in thread <sip.voidptr object at 0x0000024F9DB5F840>
+2021-12-08 14:23:15 debug core.manager Activation success: True
+2021-12-08 14:23:45 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic length: 1564000, mod 0
+2021-12-08 14:23:45 info logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Time needed for sampling and writing PulseBlockEnsemble FRS_2_dec3rd to device: 0 sec
+2021-12-08 14:23:46 debug logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic length: 1564000, mod 0
+2021-12-08 14:23:46 info logic.pulsed.sequence_generator_logic.SequenceGeneratorLogic Time needed for sampling and writing PulseBlockEnsemble FRS_2_dec3rd to device: 0 sec
+2021-12-08 14:23:46 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The set measurement_information did not contain all the necessary information or was not a dict. Setting empty dict.
+2021-12-08 14:23:48 debug logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic The set measurement_information did not contain all the necessary information or was not a dict. Setting empty dict.
+2021-12-08 14:24:02 warning logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic Only zeros received from fast counter!
+2021-12-08 14:24:07 warning logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic Only zeros received from fast counter!
+2021-12-08 14:24:12 warning logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic Only zeros received from fast counter!
+2021-12-08 14:24:17 warning logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic Only zeros received from fast counter!
+2021-12-08 14:24:22 warning logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic Only zeros received from fast counter!
+2021-12-08 14:24:27 warning logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic Only zeros received from fast counter!
+2021-12-08 14:24:32 warning logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic Only zeros received from fast counter!
+2021-12-08 14:24:37 warning logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic Only zeros received from fast counter!
+2021-12-08 14:24:42 warning logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic Only zeros received from fast counter!
+2021-12-08 14:24:43 warning logic.pulsed.pulsed_measurement_logic.PulsedMeasurementLogic Only zeros received from fast counter!
