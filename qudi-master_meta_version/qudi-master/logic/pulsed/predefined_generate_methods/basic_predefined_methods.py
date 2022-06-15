@@ -716,6 +716,178 @@ class BasicPredefinedGenerator(PredefinedGeneratorBase):
     # *************************************************************************************************
     # *************************************************************************************************
 
+    # *************************************************************************************************
+    # *************************************************************************************************
+    # edited by Andrew on Jun.15th
+    def generate_RSQ(self, name='RSQ', step_1=10.0e-9, step_2=3.0e-6,
+                     step_3=300.0e-9, step_4=100.0e-9, step_5=10.0e-9, step_6=100.0e-9, step_7=300.0e-9,
+                     step_8=300.0e-9, step_9=1.29e-6,
+                     positive_step=10.0e-9, negative_step=-10.0e-9,
+                     num_of_cycles=100,
+                     laser_channel='d_ch1',
+                     mw_channel='d_ch2', time_tagger_channel='d_ch3'):
+
+        created_blocks = list()
+        created_ensembles = list()
+        created_sequences = list()
+
+        i_array = np.arange(num_of_cycles)
+
+        # Create block and append to created_blocks list
+        rabi_block = PulseBlock(name=name)
+
+        # TODO: CHOOSE TO START TIME TAGGER BEFORE OR CHOOSE TO ADD IT IN PULSE BLOCK MANUALLY
+
+        # cycle starts
+        for i in i_array:
+
+            if i == 0:
+                s1 = self._get_trigger_element(length=step_1, increment=0,
+                                               channels=[laser_channel, time_tagger_channel])
+            else:
+                s1 = self._get_trigger_element(length=step_1, increment=0,
+                                               channels=laser_channel)
+            rabi_block.append(s1)
+
+            s2 = self._get_trigger_element(length=step_2, increment=0, channels=laser_channel)
+            rabi_block.append(s2)
+
+            s3 = self._get_idle_element(length=step_3, increment=0)
+            rabi_block.append(s3)
+
+            s4 = self._get_trigger_element(length=step_4, increment=0, channels=mw_channel)
+            rabi_block.append(s4)
+
+            s5 = self._get_idle_element(length=step_5 + positive_step * i, increment=0)
+            rabi_block.append(s5)
+
+            s6 = self._get_trigger_element(length=step_6, increment=0, channels=mw_channel)
+            rabi_block.append(s6)
+
+            s7 = self._get_idle_element(length=step_7, increment=0)
+            rabi_block.append(s7)
+
+            s8 = self._get_trigger_element(length=step_8, increment=0, channels=laser_channel)
+            rabi_block.append(s8)
+
+            s9 = self._get_idle_element(length=step_9 + negative_step * i, increment=0)
+            rabi_block.append(s9)
+
+        created_blocks.append(rabi_block)
+
+        # Create block ensemble
+        block_ensemble = PulseBlockEnsemble(name=name, rotating_frame=False)
+        block_ensemble.append((rabi_block.name, num_of_cycles - 1))
+
+        # Create and append sync trigger block if needed
+        self._add_trigger(created_blocks=created_blocks, block_ensemble=block_ensemble)
+
+        # add metadata to invoke settings later on
+        block_ensemble.measurement_information['alternating'] = False
+        block_ensemble.measurement_information['laser_ignore_list'] = list()
+        # block_ensemble.measurement_information['controlled_variable1'] = ini_mic_delay_array
+        # block_ensemble.measurement_information['controlled_variable2'] = microwave_array
+        block_ensemble.measurement_information['units'] = ('s', '')
+        block_ensemble.measurement_information['labels'] = ('Tau', 'Signal')
+        block_ensemble.measurement_information['number_of_lasers'] = num_of_cycles
+        block_ensemble.measurement_information['counting_length'] = self._get_ensemble_count_length(
+            ensemble=block_ensemble, created_blocks=created_blocks)
+
+        # Append ensemble to created_ensembles list
+        created_ensembles.append(block_ensemble)
+        return created_blocks, created_ensembles, created_sequences
+        # *************************************************************************************************
+        # *************************************************************************************************
+
+    # *************************************************************************************************
+    # *************************************************************************************************
+    # edited by Andrew on Jun.15th
+    def generate_HES(self, name='HES', step_1=10.0e-9, step_2=3.0e-6,
+                     step_3=300.0e-9, step_4=50.0e-9, step_5=10.0e-9, step_6=100.0e-9, step_7=10.0e-9,
+                     step_8=50.0e-9, step_9=300.0e-6, step_10=300.0e-9, step_11=50.28e-6,
+                     positive_step=10.0e-9, negative_step=-20.0e-9,
+                     num_of_cycles=100,
+                     laser_channel='d_ch1',
+                     mw_channel='d_ch2', time_tagger_channel='d_ch3'):
+
+        created_blocks = list()
+        created_ensembles = list()
+        created_sequences = list()
+
+        i_array = np.arange(num_of_cycles)
+
+        # Create block and append to created_blocks list
+        rabi_block = PulseBlock(name=name)
+
+        # TODO: CHOOSE TO START TIME TAGGER BEFORE OR CHOOSE TO ADD IT IN PULSE BLOCK MANUALLY
+
+        # cycle starts
+        for i in i_array:
+
+            if i == 0:
+                s1 = self._get_trigger_element(length=step_1, increment=0,
+                                               channels=[laser_channel, time_tagger_channel])
+            else:
+                s1 = self._get_trigger_element(length=step_1, increment=0,
+                                               channels=laser_channel)
+            rabi_block.append(s1)
+
+            s2 = self._get_trigger_element(length=step_2, increment=0, channels=laser_channel)
+            rabi_block.append(s2)
+
+            s3 = self._get_idle_element(length=step_3, increment=0)
+            rabi_block.append(s3)
+
+            s4 = self._get_trigger_element(length=step_4, increment=0, channels=mw_channel)
+            rabi_block.append(s4)
+
+            s5 = self._get_idle_element(length=step_5 + positive_step * i, increment=0)
+            rabi_block.append(s5)
+
+            s6 = self._get_trigger_element(length=step_6, increment=0, channels=mw_channel)
+            rabi_block.append(s6)
+
+            s7 = self._get_idle_element(length=step_7 + positive_step * i, increment=0)
+            rabi_block.append(s7)
+
+            s8 = self._get_trigger_element(length=step_8, increment=0, channels=mw_channel)
+            rabi_block.append(s8)
+
+            s9 = self._get_idle_element(length=step_9, increment=0)
+            rabi_block.append(s9)
+
+            s10 = self._get_trigger_element(length=step_10, increment=0, channels=laser_channel)
+            rabi_block.append(s10)
+
+            s11 = self._get_idle_element(length=step_11 + negative_step * i, increment=0)
+            rabi_block.append(s11)
+
+        created_blocks.append(rabi_block)
+
+        # Create block ensemble
+        block_ensemble = PulseBlockEnsemble(name=name, rotating_frame=False)
+        block_ensemble.append((rabi_block.name, num_of_cycles - 1))
+
+        # Create and append sync trigger block if needed
+        self._add_trigger(created_blocks=created_blocks, block_ensemble=block_ensemble)
+
+        # add metadata to invoke settings later on
+        block_ensemble.measurement_information['alternating'] = False
+        block_ensemble.measurement_information['laser_ignore_list'] = list()
+        # block_ensemble.measurement_information['controlled_variable1'] = ini_mic_delay_array
+        # block_ensemble.measurement_information['controlled_variable2'] = microwave_array
+        block_ensemble.measurement_information['units'] = ('s', '')
+        block_ensemble.measurement_information['labels'] = ('Tau', 'Signal')
+        block_ensemble.measurement_information['number_of_lasers'] = num_of_cycles
+        block_ensemble.measurement_information['counting_length'] = self._get_ensemble_count_length(
+            ensemble=block_ensemble, created_blocks=created_blocks)
+
+        # Append ensemble to created_ensembles list
+        created_ensembles.append(block_ensemble)
+        return created_blocks, created_ensembles, created_sequences
+        # *************************************************************************************************
+        # *************************************************************************************************
+
     def generate_pulsedodmr(self, name='pulsedODMR', freq_start=2870.0e6, freq_step=0.2e6,
                             num_of_points=50):
         """
